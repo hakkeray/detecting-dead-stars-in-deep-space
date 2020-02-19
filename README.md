@@ -9,7 +9,7 @@ MODULE 5 FINAL PROJECT
 * Instructor name: James Irving, PhD
 * Blog post URL:
 
-### `OVERVIEW`
+### OVERVIEW
 
 *From Dr. Robert Lyon on Kaggle:*
 
@@ -23,7 +23,8 @@ Each pulsar produces a slightly different emission pattern, which varies slightl
 
 The data set shared here contains **16,259 spurious examples caused by RFI/noise**, and **1,639 real pulsar examples**. Each row lists the variables first, and the class label is the final entry. The class labels used are 0 (negative) and 1 (positive).
 
-### `Attributes`
+### Attributes
+
 Each candidate is described by 8 continuous variables, and a single class variable. The first four are simple statistics obtained from the integrated pulse profile (folded profile). This is an array of continuous variables that describe a longitude-resolved version of the signal that has been averaged in both time and frequency . The remaining four variables are similarly obtained from the DM-SNR curve . These are summarised below:
 
     * Mean of the integrated profile.
@@ -42,7 +43,7 @@ HTRU 2 Summary:
             * 1,639 positive examples
             * 16,259 negative examples
 
-### `Outline`
+### Outline
 
     * IMPORT PACKAGES + LIBRARIES
     
@@ -65,7 +66,7 @@ HTRU 2 Summary:
     * FUTURE WORK
 
 
-# `IMPORT`
+# IMPORT
 
 
 ```python
@@ -101,41 +102,41 @@ pd.set_option('display.max_columns', 0)
 
 
 <style  type="text/css" >
-</style><table id="T_7a3055e2_51aa_11ea_9c71_f40f2405a054" ><caption>Loaded Packages and Handles</caption><thead>    <tr>        <th class="col_heading level0 col0" >Handle</th>        <th class="col_heading level0 col1" >Package</th>        <th class="col_heading level0 col2" >Description</th>    </tr></thead><tbody>
+</style><table id="T_8f607e64_5280_11ea_a243_f40f2405a054" ><caption>Loaded Packages and Handles</caption><thead>    <tr>        <th class="col_heading level0 col0" >Handle</th>        <th class="col_heading level0 col1" >Package</th>        <th class="col_heading level0 col2" >Description</th>    </tr></thead><tbody>
                 <tr>
-                                <td id="T_7a3055e2_51aa_11ea_9c71_f40f2405a054row0_col0" class="data row0 col0" >dp</td>
-                        <td id="T_7a3055e2_51aa_11ea_9c71_f40f2405a054row0_col1" class="data row0 col1" >IPython.display</td>
-                        <td id="T_7a3055e2_51aa_11ea_9c71_f40f2405a054row0_col2" class="data row0 col2" >Display modules with helpful display and clearing commands.</td>
+                                <td id="T_8f607e64_5280_11ea_a243_f40f2405a054row0_col0" class="data row0 col0" >dp</td>
+                        <td id="T_8f607e64_5280_11ea_a243_f40f2405a054row0_col1" class="data row0 col1" >IPython.display</td>
+                        <td id="T_8f607e64_5280_11ea_a243_f40f2405a054row0_col2" class="data row0 col2" >Display modules with helpful display and clearing commands.</td>
             </tr>
             <tr>
-                                <td id="T_7a3055e2_51aa_11ea_9c71_f40f2405a054row1_col0" class="data row1 col0" >fs</td>
-                        <td id="T_7a3055e2_51aa_11ea_9c71_f40f2405a054row1_col1" class="data row1 col1" >fsds_100719</td>
-                        <td id="T_7a3055e2_51aa_11ea_9c71_f40f2405a054row1_col2" class="data row1 col2" >Custom data science bootcamp student package</td>
+                                <td id="T_8f607e64_5280_11ea_a243_f40f2405a054row1_col0" class="data row1 col0" >fs</td>
+                        <td id="T_8f607e64_5280_11ea_a243_f40f2405a054row1_col1" class="data row1 col1" >fsds_100719</td>
+                        <td id="T_8f607e64_5280_11ea_a243_f40f2405a054row1_col2" class="data row1 col2" >Custom data science bootcamp student package</td>
             </tr>
             <tr>
-                                <td id="T_7a3055e2_51aa_11ea_9c71_f40f2405a054row2_col0" class="data row2 col0" >mpl</td>
-                        <td id="T_7a3055e2_51aa_11ea_9c71_f40f2405a054row2_col1" class="data row2 col1" >matplotlib</td>
-                        <td id="T_7a3055e2_51aa_11ea_9c71_f40f2405a054row2_col2" class="data row2 col2" >Matplotlib's base OOP module with formatting artists</td>
+                                <td id="T_8f607e64_5280_11ea_a243_f40f2405a054row2_col0" class="data row2 col0" >mpl</td>
+                        <td id="T_8f607e64_5280_11ea_a243_f40f2405a054row2_col1" class="data row2 col1" >matplotlib</td>
+                        <td id="T_8f607e64_5280_11ea_a243_f40f2405a054row2_col2" class="data row2 col2" >Matplotlib's base OOP module with formatting artists</td>
             </tr>
             <tr>
-                                <td id="T_7a3055e2_51aa_11ea_9c71_f40f2405a054row3_col0" class="data row3 col0" >plt</td>
-                        <td id="T_7a3055e2_51aa_11ea_9c71_f40f2405a054row3_col1" class="data row3 col1" >matplotlib.pyplot</td>
-                        <td id="T_7a3055e2_51aa_11ea_9c71_f40f2405a054row3_col2" class="data row3 col2" >Matplotlib's matlab-like plotting module</td>
+                                <td id="T_8f607e64_5280_11ea_a243_f40f2405a054row3_col0" class="data row3 col0" >plt</td>
+                        <td id="T_8f607e64_5280_11ea_a243_f40f2405a054row3_col1" class="data row3 col1" >matplotlib.pyplot</td>
+                        <td id="T_8f607e64_5280_11ea_a243_f40f2405a054row3_col2" class="data row3 col2" >Matplotlib's matlab-like plotting module</td>
             </tr>
             <tr>
-                                <td id="T_7a3055e2_51aa_11ea_9c71_f40f2405a054row4_col0" class="data row4 col0" >np</td>
-                        <td id="T_7a3055e2_51aa_11ea_9c71_f40f2405a054row4_col1" class="data row4 col1" >numpy</td>
-                        <td id="T_7a3055e2_51aa_11ea_9c71_f40f2405a054row4_col2" class="data row4 col2" >scientific computing with Python</td>
+                                <td id="T_8f607e64_5280_11ea_a243_f40f2405a054row4_col0" class="data row4 col0" >np</td>
+                        <td id="T_8f607e64_5280_11ea_a243_f40f2405a054row4_col1" class="data row4 col1" >numpy</td>
+                        <td id="T_8f607e64_5280_11ea_a243_f40f2405a054row4_col2" class="data row4 col2" >scientific computing with Python</td>
             </tr>
             <tr>
-                                <td id="T_7a3055e2_51aa_11ea_9c71_f40f2405a054row5_col0" class="data row5 col0" >pd</td>
-                        <td id="T_7a3055e2_51aa_11ea_9c71_f40f2405a054row5_col1" class="data row5 col1" >pandas</td>
-                        <td id="T_7a3055e2_51aa_11ea_9c71_f40f2405a054row5_col2" class="data row5 col2" >High performance data structures and tools</td>
+                                <td id="T_8f607e64_5280_11ea_a243_f40f2405a054row5_col0" class="data row5 col0" >pd</td>
+                        <td id="T_8f607e64_5280_11ea_a243_f40f2405a054row5_col1" class="data row5 col1" >pandas</td>
+                        <td id="T_8f607e64_5280_11ea_a243_f40f2405a054row5_col2" class="data row5 col2" >High performance data structures and tools</td>
             </tr>
             <tr>
-                                <td id="T_7a3055e2_51aa_11ea_9c71_f40f2405a054row6_col0" class="data row6 col0" >sns</td>
-                        <td id="T_7a3055e2_51aa_11ea_9c71_f40f2405a054row6_col1" class="data row6 col1" >seaborn</td>
-                        <td id="T_7a3055e2_51aa_11ea_9c71_f40f2405a054row6_col2" class="data row6 col2" >High-level data visualization library based on matplotlib</td>
+                                <td id="T_8f607e64_5280_11ea_a243_f40f2405a054row6_col0" class="data row6 col0" >sns</td>
+                        <td id="T_8f607e64_5280_11ea_a243_f40f2405a054row6_col1" class="data row6 col1" >seaborn</td>
+                        <td id="T_8f607e64_5280_11ea_a243_f40f2405a054row6_col2" class="data row6 col2" >High-level data visualization library based on matplotlib</td>
             </tr>
     </tbody></table>
 
@@ -173,19 +174,16 @@ from sklearn import svm
 from sklearn import tree
 
 from sklearn.tree import DecisionTreeClassifier 
-from sklearn.metrics import accuracy_score, roc_curve, auc
+from sklearn.metrics import accuracy_score,roc_curve,auc,average_precision_score,recall_score,precision_score,f1_score,classification_report
 from sklearn.tree import export_graphviz
 from IPython.display import Image  
 from pydotplus import graph_from_dot_data
 from xgboost import XGBClassifier
-from sklearn.metrics import accuracy_score
-from sklearn.model_selection import GridSearchCV
-
-
-from sklearn.metrics import average_precision_score, recall_score, precision_score, f1_score
+from sklearn.metrics import confusion_matrix
+from sklearn.model_selection import GridSearchCV 
 ```
 
-# `OBTAIN`
+# OBTAIN
 
 
 ```python
@@ -293,7 +291,7 @@ df.head()
 
 
 
-# `SCRUB`
+# SCRUB
 
 
 ```python
@@ -513,7 +511,7 @@ df.isna().sum()
 
 
 
-# `EXPLORE`
+# EXPLORE
 
 Exploratory Data Analysis (EDA)
 
@@ -545,12 +543,12 @@ df['TARGET'].value_counts()
 
 ## Comparing Attributes
 
-### Hotmap( )
+### `Hotmap( )`
 
 
 ```python
 def hotmap(df, figsize=(10,8)):
-    
+    ##### correlation heatmap
     corr = df.corr()
     fig, ax = plt.subplots(figsize=figsize)
     mask = np.zeros_like(corr, dtype=np.bool)
@@ -564,13 +562,36 @@ def hotmap(df, figsize=(10,8)):
     plt.title("CORRELATION BETWEEN VARIABLES")
     plt.show();
     
-    #####
+    ##### descriptive statistics heatmap
     fig, ax = plt.subplots(figsize=figsize)
     
     sns.heatmap(df.describe()[1:].transpose(),annot=True, ax=ax, 
                 linecolor="w", linewidth=2,cmap=sns.color_palette("Set2")) #"Set2"
     ax.set_ylim(len(corr), -.5,.5)
     plt.title("Data summary")
+    plt.show()
+    
+    plt.figure(figsize=(13,8))
+    
+    ### compare proportion of target classes 
+    plt.subplot(121)
+    ax = sns.countplot(y = df["TARGET"],
+                       palette=["b","lime"],
+                       linewidth=1,
+                       edgecolor="k"*2)
+    for i,j in enumerate(df["TARGET"].value_counts().values):
+        ax.text(.7,i,j,weight = "bold",fontsize = 27)
+    plt.title("Count for target variable in datset")
+
+
+    plt.subplot(122)
+    plt.pie(df["TARGET"].value_counts().values,
+            labels=["not pulsars","pulsars"],
+            autopct="%1.0f%%",wedgeprops={"linewidth":2,"edgecolor":"white"})
+    circ = plt.Circle((0,0),.7,color = "white")
+    plt.gca().add_artist(circ)
+    plt.subplots_adjust(wspace = .2)
+    plt.title("Proportion of target variable in dataset")
     plt.show()
 
 hotmap(df, figsize=(10,8))
@@ -585,36 +606,30 @@ hotmap(df, figsize=(10,8))
 
 
 
-```python
-plt.figure(figsize=(13,8))
-plt.subplot(121)
-ax = sns.countplot(y = df["TARGET"],
-                   palette=["b","lime"],
-                   linewidth=1,
-                   edgecolor="k"*2)
-for i,j in enumerate(df["TARGET"].value_counts().values):
-    ax.text(.7,i,j,weight = "bold",fontsize = 27)
-plt.title("Count for target variable in datset")
+![png](output_20_2.png)
 
 
-plt.subplot(122)
-plt.pie(df["TARGET"].value_counts().values,
-        labels=["not pulsars","pulsars"],
-        autopct="%1.0f%%",wedgeprops={"linewidth":2,"edgecolor":"white"})
-circ = plt.Circle((0,0),.7,color = "white")
-plt.gca().add_artist(circ)
-plt.subplots_adjust(wspace = .2)
-plt.title("Proportion of target variable in dataset")
-plt.show()
-```
-
-
-![png](output_21_0.png)
-
+Target Class Values are highly differentiated for the following features:
+    
+    * Kurtosis Integrated Profile
+    * Skewness Integrated Profile
+ 
+Other candidates include:
+  
+    * Mean Curve
+    * Standard Deviation Cruve
+    * Kurtosis Curve
+    * Skewness Curve
+    
+Least likely to be important in distinguishing pulsars and RFI include:
+    
+    * Mean Integrated Profile
+    * Standard Deviation IP
+   
 
 
 ```python
-#BARPLOTS
+# LINEPLOTS
 compare = df.groupby('TARGET')[['MEAN_IP', 'STD_IP', 'KURTOSIS_IP', 'SKEWNESS_IP',
                                         'MEAN_CURVE', 'STD_CURVE', 'KURTOSIS_CURVE',
                                         'SKEWNESS_CURVE']].mean().reset_index()
@@ -622,31 +637,7 @@ compare = df.groupby('TARGET')[['MEAN_IP', 'STD_IP', 'KURTOSIS_IP', 'SKEWNESS_IP
 
 compare = compare.drop('TARGET', axis=1)
 
-compare.plot(kind="bar",width=.6,figsize=(13,6),colormap="Set2")
-plt.grid(True,alpha=.3)
-plt.title("COMPARING MEAN OF ATTRIBUTES FOR TARGET CLASSES")
-
-compare1 = df.groupby('TARGET')[['MEAN_IP', 'STD_IP', 'KURTOSIS_IP', 'SKEWNESS_IP',
-                                        'MEAN_CURVE', 'STD_CURVE', 'KURTOSIS_CURVE',
-                                        'SKEWNESS_CURVE']].std().reset_index()
-compare1 = compare1.drop('TARGET',axis=1)
-compare1.plot(kind="bar",width=.6,figsize=(13,6),colormap="Set2")
-plt.grid(True,alpha=.3)
-plt.title("COMPARING STANDARD DEVIATION OF ATTRIBUTES FOR TARGET CLASSES")
-plt.show()
-```
-
-
-![png](output_22_0.png)
-
-
-
-![png](output_22_1.png)
-
-
-
-```python
-# LINEPLOTS
+# compare mean of target class varibales
 compare_mean = compare.transpose().reset_index()
 compare_mean = compare_mean.rename(columns={'index':"features", 0:"not_pulsar", 1:"pulsar"})
 plt.figure(figsize=(13,14))
@@ -657,6 +648,13 @@ plt.xticks(rotation=45)
 plt.xlabel("")
 plt.grid(True,alpha=.3)
 plt.title("COMPARING MEAN OF ATTRIBUTES FOR TARGET CLASSES")
+
+# compare standard deviation of target class variables
+compare1 = df.groupby('TARGET')[['MEAN_IP', 'STD_IP', 'KURTOSIS_IP', 'SKEWNESS_IP',
+                                        'MEAN_CURVE', 'STD_CURVE', 'KURTOSIS_CURVE',
+                                        'SKEWNESS_CURVE']].std().reset_index()
+compare1 = compare1.drop('TARGET',axis=1)
+
 
 compare_std = compare1.transpose().reset_index()
 compare_std = compare_std.rename(columns={'index':"features", 0:"not_pulsar", 1:"pulsar"})
@@ -675,8 +673,10 @@ plt.show()
 
 
 
-![png](output_23_1.png)
+![png](output_22_1.png)
 
+
+The mean and standard deviation of the Skewness Curve if also a good candidate predictor for our target class.
 
 
 ```python
@@ -730,8 +730,8 @@ df.columns
 
 
 
-    Index(['MEAN_IP', 'STDEV_IP', 'KURTOSIS_IP', 'SKEWNESS_IP', 'MEAN_CURVE',
-           'STDEV_CURVE', 'KURTOSIS_CURVE', 'SKEWNESS_CURVE', 'TARGET'],
+    Index(['MEAN_IP', 'STD_IP', 'KURTOSIS_IP', 'SKEWNESS_IP', 'MEAN_CURVE',
+           'STD_CURVE', 'KURTOSIS_CURVE', 'SKEWNESS_CURVE', 'TARGET'],
           dtype='object')
 
 
@@ -918,6 +918,25 @@ for i,j in itertools.zip_longest(columns,range(length)):
 
 
 ```python
+# BARPLOTS
+columns = [x for x in df.columns if x not in ['TARGET']]
+length  = len(columns)
+
+plt.figure(figsize=(13,25))
+
+for i,j in itertools.zip_longest(columns,range(length)):
+    plt.subplot(length/2,length/4,j+1)
+    sns.barplot(x=df['TARGET'],y=df[i],
+                   palette=["blue","lime"],alpha=.7)
+    plt.title(i)
+```
+
+
+![png](output_33_0.png)
+
+
+
+```python
 f, ax = plt.subplots(figsize=(6.5, 6.5))
 sns.despine(f, left=True, bottom=True)
 
@@ -932,12 +951,12 @@ sns.scatterplot(x='MEAN_IP', y='KURTOSIS_IP',
 
 
 
-    <matplotlib.axes._subplots.AxesSubplot at 0x128277198>
+    <matplotlib.axes._subplots.AxesSubplot at 0x123271080>
 
 
 
 
-![png](output_33_1.png)
+![png](output_34_1.png)
 
 
 
@@ -955,12 +974,12 @@ sns.scatterplot(x='SKEWNESS_CURVE', y='KURTOSIS_IP',
 
 
 
-    <matplotlib.axes._subplots.AxesSubplot at 0x1286c7f28>
+    <matplotlib.axes._subplots.AxesSubplot at 0x124630dd8>
 
 
 
 
-![png](output_34_1.png)
+![png](output_35_1.png)
 
 
 
@@ -978,12 +997,12 @@ sns.scatterplot(x='KURTOSIS_IP', y='KURTOSIS_CURVE',
 
 
 
-    <matplotlib.axes._subplots.AxesSubplot at 0x12d14d748>
+    <matplotlib.axes._subplots.AxesSubplot at 0x127522588>
 
 
 
 
-![png](output_35_1.png)
+![png](output_36_1.png)
 
 
 
@@ -1001,12 +1020,12 @@ sns.scatterplot(x='KURTOSIS_IP', y='STD_IP',
 
 
 
-    <matplotlib.axes._subplots.AxesSubplot at 0x128078780>
+    <matplotlib.axes._subplots.AxesSubplot at 0x1275220f0>
 
 
 
 
-![png](output_36_1.png)
+![png](output_37_1.png)
 
 
 
@@ -1024,12 +1043,12 @@ sns.scatterplot(x='KURTOSIS_IP', y='KURTOSIS_CURVE',
 
 
 
-    <matplotlib.axes._subplots.AxesSubplot at 0x12cc43828>
+    <matplotlib.axes._subplots.AxesSubplot at 0x1265d90f0>
 
 
 
 
-![png](output_37_1.png)
+![png](output_38_1.png)
 
 
 # `MODEL`
@@ -1071,7 +1090,6 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.33)
 
 ```python
 # logistic regression
-
 pipe_lr = Pipeline([('scl', StandardScaler()),
                    ('pca', PCA(n_components=2)),
                    ('clf', LogisticRegression(class_weight='balanced'))])
@@ -1088,7 +1106,6 @@ pipe_dt = Pipeline([('scl', StandardScaler()),
                     ('clf', tree.DecisionTreeClassifier(class_weight='balanced'))])
 
 # xgboost
-
 pipe_xgb = Pipeline([('xgb', StandardScaler()),
                     ('pca', PCA(n_components=2)),
                      ('clf', XGBClassifier(class_weight='balanced'))])
@@ -1097,15 +1114,16 @@ pipe_xgb = Pipeline([('xgb', StandardScaler()),
 
 ```python
 # List of pipelines for ease of iteration
-
 pipelines = [pipe_lr, pipe_svm, pipe_dt, pipe_xgb]
 ```
 
 
 ```python
 # Dictionary of pipelines and classifier types for ease of reference
-pipe_dict = {0: 'Logistic Regression', 1: 'Support Vector Machine', 2: 'Decision Tree', 3: 'XG Boost'}
-
+pipe_dict = {0: 'Logistic Regression', 
+             1: 'Support Vector Machine', 
+             2: 'Decision Tree', 
+             3: 'XG Boost'}
 ```
 
 
@@ -1118,20 +1136,19 @@ for pipe in pipelines:
 
 ```python
 # Compare accuracies
-
 for idx, val in enumerate(pipelines):
     print('%s pipeline training accuracy: %.3f' % (pipe_dict[idx], val.score(X_train, y_train)))
     print('%s pipeline test accuracy: %.3f' % (pipe_dict[idx], val.score(X_test, y_test)))
 ```
 
-    Logistic Regression pipeline training accuracy: 0.936
-    Logistic Regression pipeline test accuracy: 0.943
-    Support Vector Machine pipeline training accuracy: 0.956
-    Support Vector Machine pipeline test accuracy: 0.961
+    Logistic Regression pipeline training accuracy: 0.935
+    Logistic Regression pipeline test accuracy: 0.937
+    Support Vector Machine pipeline training accuracy: 0.955
+    Support Vector Machine pipeline test accuracy: 0.955
     Decision Tree pipeline training accuracy: 1.000
-    Decision Tree pipeline test accuracy: 0.962
-    XG Boost pipeline training accuracy: 0.974
-    XG Boost pipeline test accuracy: 0.977
+    Decision Tree pipeline test accuracy: 0.959
+    XG Boost pipeline training accuracy: 0.976
+    XG Boost pipeline test accuracy: 0.973
 
 
 
@@ -1159,9 +1176,11 @@ print('Saved %s pipeline to file' % pipe_dict[best_clf])
     Saved XG Boost pipeline to file
 
 
-# `XG Boost`
+# `Decision Tree`
 
-Moving ahead with XG Boost
+Decision Tree
+
+## Standardize
 
 
 ```python
@@ -1171,16 +1190,672 @@ X_train_transformed = std.fit_transform(X_train)
 X_test_transformed = std.transform(X_test)
 ```
 
+## Create Instance
+
+
+```python
+## Create an instance of decision tree classifier
+dt_clf = DecisionTreeClassifier(criterion='entropy', class_weight='balanced')
+```
+
+## Fit
+
+
+```python
+# Fit the training data to the model
+dt_clf.fit(X_train_transformed, y_train)
+```
+
+
+
+
+    DecisionTreeClassifier(class_weight='balanced', criterion='entropy',
+                           max_depth=None, max_features=None, max_leaf_nodes=None,
+                           min_impurity_decrease=0.0, min_impurity_split=None,
+                           min_samples_leaf=1, min_samples_split=2,
+                           min_weight_fraction_leaf=0.0, presort=False,
+                           random_state=None, splitter='best')
+
+
+
+## DOT Graph
+
+
+```python
+# Create DOT data
+dot_data = export_graphviz(dt_clf, out_file=None, 
+                           feature_names=X.columns,  
+                           class_names=np.unique(y).astype('str'), 
+                           filled=True, rounded=True, special_characters=True)
+
+# Draw graph
+graph = graph_from_dot_data(dot_data)  
+
+# Show graph
+Image(graph.create_png())
+```
+
+
+
+
+![png](output_59_0.png)
+
+
+
+## Make Predictions
+
+
+```python
+# Make predictions for test data
+y_pred = dt_clf.predict(X_test_transformed)
+```
+
+## Evaluate
+
+### Accuracy
+
+
+```python
+# Check the accuracy, AUC, and create a confusion matrix
+
+acc = accuracy_score(y_test,y_pred) * 100
+print('Accuracy is :{0}'.format(acc))
+```
+
+    Accuracy is :96.56339935669544
+
+
+### AUC
+
+
+```python
+# Check the AUC for predictions
+false_positive_rate, true_positive_rate, thresholds = roc_curve(y_test, y_pred)
+roc_auc = auc(false_positive_rate, true_positive_rate)
+print('\nAUC is :{0}'.format(round(roc_auc, 2)))
+
+```
+
+    
+    AUC is :0.91
+
+
+### Confusion Matrix
+
+
+```python
+# Create and print a confusion matrix 
+print('\nConfusion Matrix')
+print('----------------')
+pd.crosstab(y_test, y_pred, rownames=['True'], colnames=['Predicted'], margins=True)
+```
+
+    
+    Confusion Matrix
+    ----------------
+
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Predicted</th>
+      <th>0</th>
+      <th>1</th>
+      <th>All</th>
+    </tr>
+    <tr>
+      <th>True</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>0</td>
+      <td>5242</td>
+      <td>121</td>
+      <td>5363</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>82</td>
+      <td>462</td>
+      <td>544</td>
+    </tr>
+    <tr>
+      <td>All</td>
+      <td>5324</td>
+      <td>583</td>
+      <td>5907</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+```python
+# Print confusion matrix
+cnf_matrix = confusion_matrix(y_test, y_pred)
+print('Confusion Matrix:\n', cnf_matrix)
+```
+
+    Confusion Matrix:
+     [[5242  121]
+     [  82  462]]
+
+
+    TRUE POSITIVES: 462 Pulsars correctly identified,
+    TRUE NEGATIVES: 5242 correctly classified as noise
+    FALSE POSITIVES: 121 RFI/noise misclassified as pulsars
+    FALSE NEGATIVES: 82 Pulsars misclassifed as noise
+
+
+```python
+def plot_confusion_matrix(cm, classes,
+                          normalize=False,
+                          title='Confusion matrix',cmap=plt.cm.Blues):
+    
+    import itertools
+    # Check if normalize is set to True
+    # If so, normalize the raw confusion matrix before visualizing
+    if normalize:
+        cm = cm.astype('float') / cm.sum(axis=1)[:, np.newaxis]
+        print("Normalized confusion matrix")
+    else:
+        print('Confusion matrix, without normalization')
+
+
+    
+    fig, ax = plt.subplots(figsize=(10,10))
+    #mask = np.zeros_like(cm, dtype=np.bool)
+    #idx = np.triu_indices_from(mask)
+    
+    #mask[idx] = True
+
+    plt.imshow(cm, cmap=cmap, aspect='equal')
+    
+    # Add title and axis labels 
+    plt.title('Confusion Matrix') 
+    plt.ylabel('True label') 
+    plt.xlabel('Predicted label')
+    
+    # Add appropriate axis scales
+    tick_marks = np.arange(len(classes))
+    plt.xticks(tick_marks, classes, rotation=45)
+    plt.yticks(tick_marks, classes)
+    #ax.set_ylim(len(cm), -.5,.5)
+    
+    # Text formatting
+    fmt = '.2f' if normalize else 'd'
+    # Add labels to each cell
+    thresh = cm.max() / 2.
+    # iterate thru matrix and append labels  
+    for i, j in itertools.product(range(cm.shape[0]), range(cm.shape[1])):
+        plt.text(j, i, format(cm[i, j], fmt),
+                 horizontalalignment='center',
+                 color='darkgray' if cm[i, j] > thresh else 'black',
+                size=14, weight='bold')
+    
+    # Add a legend
+    plt.colorbar()
+    plt.show() 
+```
+
+
+```python
+# Plot normalized confusion matrix
+plot_confusion_matrix(cnf_matrix, classes=['Non-Pulsar', 'Pulsar'], normalize=True,
+                      title='Normalized confusion matrix')
+```
+
+    Normalized confusion matrix
+
+
+
+![png](output_72_1.png)
+
+
+## Parameter Tuning
+    
+    * Create an array for max_depth values ranging from 1 - 32
+    * In a loop, train the classifier for each depth value (32 runs) 
+    * Calculate the training and test AUC for each run
+    * Plot a graph to show under/over fitting and optimal value
+    * Interpret the results
+
+### Max Depth
+
+
+```python
+# Check for the best depth parameter
+max_depths = np.linspace(1, 32, 32, endpoint=True)
+train_results = []
+test_results = []
+
+# Identify the optimal tree depth for given data
+for max_depth in max_depths:
+    dt = DecisionTreeClassifier(criterion='entropy', max_depth=max_depth, class_weight='balanced')
+    dt.fit(X_train_transformed, y_train)
+    train_pred = dt.predict(X_train_transformed)
+    false_positive_rate, true_positive_rate, thresholds = roc_curve(y_train, train_pred)
+    roc_auc = auc(false_positive_rate, true_positive_rate)
+   
+    # Add auc score to previous train results
+    train_results.append(roc_auc)
+    y_pred = dt.predict(X_test_transformed)
+    false_positive_rate, true_positive_rate, thresholds = roc_curve(y_test, y_pred)
+    roc_auc = auc(false_positive_rate, true_positive_rate)
+   
+    # Add auc score to previous test results
+    test_results.append(roc_auc)
+
+# PLOT AUC curve
+plt.figure(figsize=(11,8))
+plt.plot(max_depths, train_results, 'k', label='Train AUC')
+plt.plot(max_depths, test_results, 'r', label='Test AUC')
+plt.ylabel('AUC score')
+plt.xlabel('Tree depth')
+plt.title('MAX TREE DEPTH')
+plt.legend()
+plt.show()
+```
+
+
+![png](output_75_0.png)
+
+
+    Max tree depth optimal value does not improve beyond 3 for test data.
+
+### Min Sample Split
+
+Now we'll check for the best min_samples_splits parameter for our decision tree.
+
+    * Create an array for min_sample_splits values ranging from 0.1 - 1 with an 
+    increment of 0.1
+    * In a loop, train the classifier for each min_samples_splits value (10 runs)
+    * Calculate the training and test AUC for each run
+    * Plot a graph to show under/over fitting and optimal value
+    * Interpret the results
+
+
+```python
+# Identify the optimal min-samples-split for given data
+
+min_samples_splits = np.linspace(0.1, 1.0, 10, endpoint=True)
+train_results = []
+test_results = []
+
+for min_samples_split in min_samples_splits:
+    dt = DecisionTreeClassifier(criterion='entropy', min_samples_split=min_samples_split, class_weight='balanced')
+    dt.fit(X_train_transformed, y_train)
+    train_pred = dt.predict(X_train_transformed)
+    
+    false_positive_rate, true_positive_rate, thresholds = roc_curve(y_train, train_pred)
+    roc_auc = auc(false_positive_rate, true_positive_rate)
+    train_results.append(roc_auc)
+    
+    y_pred = dt.predict(X_test_transformed)
+    false_positive_rate, true_positive_rate, thresholds = roc_curve(y_test, y_pred)
+    roc_auc = auc(false_positive_rate, true_positive_rate)
+    test_results.append(roc_auc)
+
+plt.figure(figsize=(11,8))
+plt.plot(min_samples_splits, train_results, 'k', label='Train AUC')
+plt.plot(min_samples_splits, test_results, 'r', label='Test AUC')
+plt.xlabel('Min. Sample splits')
+plt.ylabel('AUC score')
+plt.title('MIN SAMPLES SPLITS')
+plt.legend()
+plt.show()
+```
+
+
+![png](output_78_0.png)
+
+
+    AUC does not improve beyond 0.2 for test data.
+
+### Minimum Sample Leafs
+Now we'll check for the best min_samples_leafs parameter value for our decision tree.
+
+    * Create an array for min_samples_leafs values ranging from 0.1 - 0.5 
+    with an increment of 0.1
+    * In a loop, train the classifier for each min_samples_leafs value (5 runs)
+    * Calculate the training and test AUC for each run
+    * Plot a graph to show under/over fitting and optimal value
+    * Interpret the results
+
+
+```python
+# Calculate the optimal value for minimum sample leafs
+min_samples_leafs = np.linspace(0.1, 0.5, 5, endpoint=True)
+train_results = []
+test_results = []
+
+for min_samples_leaf in min_samples_leafs:
+    dt = DecisionTreeClassifier(criterion='entropy', min_samples_leaf=min_samples_leaf, class_weight='balanced')
+    dt.fit(X_train_transformed, y_train)
+    train_pred = dt.predict(X_train_transformed)
+    
+    false_positive_rate, true_positive_rate, thresholds = roc_curve(y_train, train_pred)
+    roc_auc = auc(false_positive_rate, true_positive_rate)
+    train_results.append(roc_auc)
+    
+    y_pred = dt.predict(X_test_transformed)
+    false_positive_rate, true_positive_rate, thresholds = roc_curve(y_test, y_pred)
+    roc_auc = auc(false_positive_rate, true_positive_rate)
+    test_results.append(roc_auc)
+
+# PLOT
+plt.figure(figsize=(11,7))    
+plt.plot(min_samples_leafs, train_results, 'b', label='Train AUC')
+plt.plot(min_samples_leafs, test_results, 'r', label='Test AUC')
+plt.ylabel('AUC score')
+plt.xlabel('Min. Sample Leafs')
+plt.title('MIN SAMPLE LEAFS')
+plt.legend()
+plt.show()
+```
+
+
+![png](output_81_0.png)
+
+
+    Highest AUC for both train and test data maximized at 0.10.
+
+### Maximum Features
+
+Now we'll check for the best max_features parameter value for our decision tree.
+
+    * Create an array for max_features values ranging from 1 - 12 (1 features vs all)
+    * In a loop, train the classifier for each max_features value (12 runs)
+    * Calculate the training and test AUC for each run
+    * Plot a graph to show under/over fitting and optimal value
+    * Interpret the results
+
+
+```python
+# Find the best value for optimal maximum feature size
+max_features = list(range(1, X_train.shape[1]))
+train_results = []
+test_results = []
+
+for max_feature in max_features:
+    dt = DecisionTreeClassifier(criterion='entropy', max_features=max_feature, class_weight='balanced')
+    dt.fit(X_train_transformed, y_train)
+    train_pred = dt.predict(X_train_transformed)
+    
+    false_positive_rate, true_positive_rate, thresholds = roc_curve(y_train, train_pred)
+    roc_auc = auc(false_positive_rate, true_positive_rate)
+    train_results.append(roc_auc)
+    
+    y_pred = dt.predict(X_test_transformed)
+    false_positive_rate, true_positive_rate, thresholds = roc_curve(y_test, y_pred)
+    roc_auc = auc(false_positive_rate, true_positive_rate)
+    test_results.append(roc_auc)
+
+plt.figure(figsize=(13,8))
+plt.plot(max_features, train_results, 'b', label='Train AUC')
+plt.plot(max_features, test_results, 'r', label='Test AUC')
+plt.ylabel('AUC score')
+plt.xlabel('max features')
+plt.title('MAX FEATURES')
+plt.legend()
+plt.show()
+```
+
+
+![png](output_84_0.png)
+
+
+    Increasing parameters has no clear effect on training data (flat AUC). 
+    Optimal value for test data is 5.
+
+## Retrain classifer
+
+We'll now use the best values from each training phase above and feed it back to our classifier and see if have any improvement in predictive performance.
+
+    * Train the classifier with optimal values identified
+    * Compare the AUC with vanilla DT AUC
+    * Interpret the results of comparison
+
+
+```python
+# Re-train DT classifier with optimal values identified above
+dt_clf = DecisionTreeClassifier(criterion='entropy', class_weight='balanced',
+                                max_features=5,
+                                max_depth=3,
+                                min_samples_split=0.2,
+                                min_samples_leaf=0.1)
+# fit model
+dt_clf.fit(X_train_transformed, y_train)
+
+# make predictions
+y_pred = dt_clf.predict(X_test_transformed)
+
+# roc_auc
+false_positive_rate, true_positive_rate, thresholds = roc_curve(y_test, y_pred)
+roc_auc = auc(false_positive_rate, true_positive_rate)
+roc_auc
+```
+
+
+
+
+    0.9257396472014128
+
+
+
+### DOT Graph
+
+
+```python
+# Create DOT data
+dot_data = export_graphviz(dt_clf, out_file=None, 
+                           feature_names=X.columns,  
+                           class_names=np.unique(y).astype('str'), 
+                           filled=True, rounded=True, special_characters=True)
+
+# Draw graph
+graph = graph_from_dot_data(dot_data)  
+
+# Show graph
+Image(graph.create_png())
+```
+
+
+
+
+![png](output_89_0.png)
+
+
+
+
+```python
+def modelX(algorithm, X_train, y_train, X_test, y_test, of_type):
+    from sklearn.metrics import classification_report
+    print ("**********"*7)
+    print ("MODEL X")
+    print ("**********"*7)
+    algorithm.fit(X_train, y_train)
+    y_pred = algorithm.predict(X_test)
+    
+    print (algorithm)
+    print ("\n accuracy_score :", accuracy_score(y_test, y_pred))
+    
+    print ("\nclassification report :\n",(classification_report(y_test, y_pred)))
+        
+    plt.figure(figsize=(13,10))
+    plt.subplot(221)
+    sns.heatmap(confusion_matrix(y_test, y_pred),annot=True,fmt = "d",linecolor="k",linewidths=3)
+    plt.title("CONFUSION MATRIX",fontsize=20)
+    
+    pred_probs = algorithm.predict_proba(X_test)[:,1]
+    fpr,tpr,thresholds = roc_curve(y_test, pred_probs)
+    plt.subplot(222)
+    plt.plot(fpr,tpr,label = ("Area_under the curve :",auc(fpr,tpr)),color = "r")
+    plt.plot([1,0],[1,0],linestyle = "dashed",color ="k")
+    plt.legend(loc = "best")
+    plt.title("ROC - CURVE & AREA UNDER CURVE",fontsize=20)
+    
+    if of_type == "feat":
+        
+        dataframe = pd.DataFrame(algorithm.feature_importances_, X_train.columns).reset_index()
+        dataframe = dataframe.rename(columns={"index":"features",0:"coefficients"})
+        dataframe = dataframe.sort_values(by="coefficients",ascending = False)
+        plt.subplot(223)
+        ax = sns.barplot(x ="coefficients", y="features",data=dataframe, palette="husl")
+        plt.title("FEATURE IMPORTANCES",fontsize =20)
+        for i,j in enumerate(dataframe["coefficients"]):
+            ax.text(.011,i,j,weight = "bold")
+    
+    elif of_type == "coef":
+        try:
+            dataframe = pd.DataFrame(algorithm.coef_.ravel(), X_train.columns).reset_index()
+            dataframe = dataframe.rename(columns={"index":"features",0:"coefficients"})
+            dataframe = dataframe.sort_values(by="coefficients",ascending = False)
+            plt.subplot(223)
+            ax = sns.barplot(x = "coefficients" ,y ="features",data=dataframe,palette="husl")
+            plt.title("FEATURE IMPORTANCES",fontsize =20)
+            for i,j in enumerate(dataframe["coefficients"]):
+                ax.text(.011,i,j,weight = "bold")
+        except:
+            print(f"{0} has no coef argument", str(algorithm))
+            
+
+```
+
+
+```python
+# UNSCALED DATA
+modelX(dt_clf, X_train, y_train, X_test, y_test, "feat")
+```
+
+    **********************************************************************
+    MODEL X
+    **********************************************************************
+    DecisionTreeClassifier(class_weight='balanced', criterion='entropy',
+                           max_depth=3, max_features=5, max_leaf_nodes=None,
+                           min_impurity_decrease=0.0, min_impurity_split=None,
+                           min_samples_leaf=0.1, min_samples_split=0.2,
+                           min_weight_fraction_leaf=0.0, presort=False,
+                           random_state=None, splitter='best')
+    
+     accuracy_score : 0.9656339935669545
+    
+    classification report :
+                   precision    recall  f1-score   support
+    
+               0       0.99      0.97      0.98      5363
+               1       0.78      0.88      0.82       544
+    
+        accuracy                           0.97      5907
+       macro avg       0.88      0.93      0.90      5907
+    weighted avg       0.97      0.97      0.97      5907
+    
+
+
+
+![png](output_91_1.png)
+
+
+Kurtosis Integrated Profile ('KURTOSIS_IP') is by far the most important classifying feature when it comes to identifying Pulsars. Let's double check the other metrics with our scaled/transformed data:
+
+
+```python
+# SCALED DATA
+modelX(dt_clf, X_train_transformed, y_train, X_test_transformed, y_test, "coef")
+```
+
+    **********************************************************************
+    MODEL X
+    **********************************************************************
+    DecisionTreeClassifier(class_weight='balanced', criterion='entropy',
+                           max_depth=3, max_features=5, max_leaf_nodes=None,
+                           min_impurity_decrease=0.0, min_impurity_split=None,
+                           min_samples_leaf=0.1, min_samples_split=0.2,
+                           min_weight_fraction_leaf=0.0, presort=False,
+                           random_state=None, splitter='best')
+    
+     accuracy_score : 0.9481970543423057
+    
+    classification report :
+                   precision    recall  f1-score   support
+    
+               0       0.98      0.96      0.97      5363
+               1       0.69      0.81      0.74       544
+    
+        accuracy                           0.95      5907
+       macro avg       0.83      0.88      0.86      5907
+    weighted avg       0.95      0.95      0.95      5907
+    
+    0 has no coef argument DecisionTreeClassifier(class_weight='balanced', criterion='entropy',
+                           max_depth=3, max_features=5, max_leaf_nodes=None,
+                           min_impurity_decrease=0.0, min_impurity_split=None,
+                           min_samples_leaf=0.1, min_samples_split=0.2,
+                           min_weight_fraction_leaf=0.0, presort=False,
+                           random_state=None, splitter='best')
+
+
+
+![png](output_93_1.png)
+
+
+`F1 Score`
+The F1 score (also F-score or F-measure) is a measure of a test's accuracy. It considers both the precision p and the recall r of the test to compute the score: p is the number of correct positive results divided by the number of all positive results returned by the classifier, and r is the number of correct positive results divided by the number of all relevant samples (all samples that should have been identified as positive). The F1 score is the harmonic mean of the precision and recall, where an F1 score reaches its best value at 1 (perfect precision and recall) and worst at 0.
+
+`Harmonic Mean`
+`f1 = 2*(P*R / P+R)`
+
+
+```python
+f1 = f1_score(y_test, y_pred)
+f1
+```
+
+
+
+
+    0.8245462402765774
+
+
+
+Because the data involves imbalanced classes, F1 score is most important metric for us to validate the model's accuracy. Let's compare the Decision Tree classifier performance to XGBoost next.
+
+# `XG Boost`
+
+Moving ahead with XG Boost
+
+## Create Instance and Fit
+
 
 ```python
 # Fit XG Boost model  
-# ⏰ This cell takes several minutes to run
-
 # Instantiate XGBClassifier with balanced class weights
-clf = XGBClassifier(class_weight='balanced')
+xgb_clf = XGBClassifier(class_weight='balanced')
 
 # Fit XGBClassifier
-clf.fit(X_train_transformed, y_train)
+xgb_clf.fit(X_train_transformed, y_train)
 ```
 
 
@@ -1196,12 +1871,18 @@ clf.fit(X_train_transformed, y_train)
 
 
 
+## Make Predictions
+
 
 ```python
 # Predict on training and test sets
-training_preds = clf.predict(X_train_transformed)
-test_preds = clf.predict(X_test_transformed)
+training_preds = xgb_clf.predict(X_train_transformed)
+test_preds = xgb_clf.predict(X_test_transformed)
 ```
+
+## Evaluate
+
+### Accuracy
 
 
 ```python
@@ -1214,8 +1895,52 @@ print('Validation accuracy: {:.4}%'.format(test_accuracy * 100))
 
 ```
 
-    Training Accuracy: 98.15%
-    Validation accuracy: 98.32%
+    Training Accuracy: 98.38%
+    Validation accuracy: 98.02%
+
+
+### ROC_AUC and Confusion Matrix
+
+
+```python
+# SCALED DATA
+modelX(xgb_clf, X_train_transformed, y_train, X_test_transformed, y_test, "coef")
+```
+
+    **********************************************************************
+    MODEL X
+    **********************************************************************
+    XGBClassifier(base_score=0.5, booster='gbtree', class_weight='balanced',
+                  colsample_bylevel=1, colsample_bynode=1, colsample_bytree=1,
+                  gamma=0, learning_rate=0.1, max_delta_step=0, max_depth=3,
+                  min_child_weight=1, missing=None, n_estimators=100, n_jobs=1,
+                  nthread=None, objective='binary:logistic', random_state=0,
+                  reg_alpha=0, reg_lambda=1, scale_pos_weight=1, seed=None,
+                  silent=None, subsample=1, verbosity=1)
+    
+     accuracy_score : 0.9801929913661758
+    
+    classification report :
+                   precision    recall  f1-score   support
+    
+               0       0.99      0.99      0.99      5363
+               1       0.92      0.86      0.89       544
+    
+        accuracy                           0.98      5907
+       macro avg       0.95      0.92      0.94      5907
+    weighted avg       0.98      0.98      0.98      5907
+    
+    0 has no coef argument XGBClassifier(base_score=0.5, booster='gbtree', class_weight='balanced',
+                  colsample_bylevel=1, colsample_bynode=1, colsample_bytree=1,
+                  gamma=0, learning_rate=0.1, max_delta_step=0, max_depth=3,
+                  min_child_weight=1, missing=None, n_estimators=100, n_jobs=1,
+                  nthread=None, objective='binary:logistic', random_state=0,
+                  reg_alpha=0, reg_lambda=1, scale_pos_weight=1, seed=None,
+                  silent=None, subsample=1, verbosity=1)
+
+
+
+![png](output_106_1.png)
 
 
 ## GridSearchCV
@@ -1225,17 +1950,17 @@ Tuning XG Boost with a parameter Gridsearch
 
 ```python
 param_grid = {
-    'learning_rate': [0.1, 0.2],
+    'learning_rate': [0.1, 0.2, 0.3],
     'max_depth': [6],
     'min_child_weight': [1, 2],
-    'subsample': [0.5, 0.7],
+    'subsample': [0.3, 0.5, 0.7],
     'n_estimators': [100],
 }
 ```
 
 
 ```python
-grid_clf = GridSearchCV(clf, param_grid, scoring='accuracy', cv=None, n_jobs=1)
+grid_clf = GridSearchCV(xgb_clf, param_grid, scoring='accuracy', cv=None, n_jobs=1)
 grid_clf.fit(X_train_transformed, y_train)
 
 best_parameters = grid_clf.best_params_
@@ -1255,14 +1980,14 @@ print('Validation accuracy: {:.4}%'.format(test_accuracy * 100))
 ```
 
     Grid Search found the following optimal parameters: 
-    learning_rate: 0.1
+    learning_rate: 0.3
     max_depth: 6
     min_child_weight: 1
     n_estimators: 100
     subsample: 0.7
     
-    Training Accuracy: 98.92%
-    Validation accuracy: 98.32%
+    Training Accuracy: 99.96%
+    Validation accuracy: 97.78%
 
 
 ## Evaluate Model
@@ -1279,7 +2004,66 @@ print('\nAUC is :{0}'.format(round(roc_auc, 2)))
 ```
 
     
-    AUC is :0.93
+    AUC is :0.92
+
+
+
+```python
+# compare a few different regularization performances on the dataset:
+C_param_range = [0.005, 0.1, 0.2, 0.3, 0.5, 0.6, 0.7, 0.8]
+names = [0.005, 0.1, 0.2, 0.3, 0.5, 0.6, 0.7, 0.8, 0.9]
+colors = sns.color_palette('Set2', n_colors=len(names))
+
+plt.figure(figsize=(10, 8))
+
+for n, c in enumerate(C_param_range):
+
+    # Predict
+    #y_pred = tree_clf.predict(X_test)
+    y_pred = dt_clf.predict(X_test_transformed)
+    y_score = accuracy_score(y_test, y_pred)
+    
+    
+    fpr, tpr, thresholds = roc_curve(y_test, y_pred)
+    #roc_auc = auc(fpr, tpr)
+    print('----------------------------------------------')
+    print('AUC for {}: {}'.format(names[n], auc(fpr, tpr)))
+    lw = 2
+    plt.plot(fpr, tpr, color=colors[n],
+             lw=lw, label='ROC curve Normalization Weight: {}'.format(names[n]))
+    
+plt.plot([0, 1], [0, 1], color='navy', lw=lw, linestyle='--')
+plt.xlim([0.0, 1.0])
+plt.ylim([0.0, 1.05])
+plt.yticks([i/20.0 for i in range(21)])
+plt.xticks([i/20.0 for i in range(21)])
+plt.xlabel('False Positive Rate')
+plt.ylabel('True Positive Rate')
+plt.title('Receiver operating characteristic (ROC) Curve')
+plt.legend(loc='lower right')
+plt.show()
+```
+
+    ----------------------------------------------
+    AUC for 0.005: 0.8839272493446382
+    ----------------------------------------------
+    AUC for 0.1: 0.8839272493446382
+    ----------------------------------------------
+    AUC for 0.2: 0.8839272493446382
+    ----------------------------------------------
+    AUC for 0.3: 0.8839272493446382
+    ----------------------------------------------
+    AUC for 0.5: 0.8839272493446382
+    ----------------------------------------------
+    AUC for 0.6: 0.8839272493446382
+    ----------------------------------------------
+    AUC for 0.7: 0.8839272493446382
+    ----------------------------------------------
+    AUC for 0.8: 0.8839272493446382
+
+
+
+![png](output_113_1.png)
 
 
 ### Confusion matrix
@@ -1332,20 +2116,20 @@ pd.crosstab(y_test, test_preds, rownames=['True'], colnames=['Predicted'], margi
   <tbody>
     <tr>
       <td>0</td>
-      <td>5377</td>
-      <td>31</td>
-      <td>5408</td>
+      <td>5324</td>
+      <td>39</td>
+      <td>5363</td>
     </tr>
     <tr>
       <td>1</td>
-      <td>68</td>
-      <td>431</td>
-      <td>499</td>
+      <td>78</td>
+      <td>466</td>
+      <td>544</td>
     </tr>
     <tr>
       <td>All</td>
-      <td>5445</td>
-      <td>462</td>
+      <td>5402</td>
+      <td>505</td>
       <td>5907</td>
     </tr>
   </tbody>
@@ -1365,66 +2149,14 @@ print('Confusion Matrix:\n', cnf_matrix)
 ```
 
     Confusion Matrix:
-     [[5377   31]
-     [  68  431]]
+     [[5324   39]
+     [  78  466]]
 
-
-
-```python
-def plot_confusion_matrix(cm, classes,
-                          normalize=False,
-                          title='Confusion matrix',cmap='magma'):
-                          #cmap=plt.cm.Blues):
-    
-    import itertools
-    # Check if normalize is set to True
-    # If so, normalize the raw confusion matrix before visualizing
-    if normalize:
-        cm = cm.astype('float') / cm.sum(axis=1)[:, np.newaxis]
-        print("Normalized confusion matrix")
-    else:
-        print('Confusion matrix, without normalization')
-
-
-    
-    fig, ax = plt.subplots(figsize=(10,10))
-    #mask = np.zeros_like(cm, dtype=np.bool)
-    #idx = np.triu_indices_from(mask)
-    
-    #mask[idx] = True
-
-    plt.imshow(cm, cmap=cmap, aspect='auto')
-    
-    # Add title and axis labels 
-    plt.title('Confusion Matrix') 
-    plt.ylabel('True label') 
-    plt.xlabel('Predicted label')
-    
-    # Add appropriate axis scales
-    tick_marks = np.arange(len(classes))
-    plt.xticks(tick_marks, classes, rotation=45)
-    plt.yticks(tick_marks, classes)
-    ax.set_ylim(len(cm), -.5,.5)
-    
-    # Text formatting
-    fmt = '.2f' if normalize else 'd'
-    # Add labels to each cell
-    thresh = cm.max() / 2.
-    # iterate thru matrix and append labels  
-    for i, j in itertools.product(range(cm.shape[0]), range(cm.shape[1])):
-        plt.text(j, i, format(cm[i, j], fmt),
-                 horizontalalignment='center',
-                 color='black' if cm[i, j] > thresh else 'white')
-    
-    # Add a legend
-    plt.colorbar()
-    plt.show() 
-```
 
 
 ```python
 # Plot normalized confusion matrix
-plot_confusion_matrix(cnf_matrix, classes=set(y), normalize=True,
+plot_confusion_matrix(cnf_matrix, classes=['Non-Pulsar', 'Pulsar'], normalize=True,
                       title='Normalized confusion matrix')
 ```
 
@@ -1432,13 +2164,13 @@ plot_confusion_matrix(cnf_matrix, classes=set(y), normalize=True,
 
 
 
-![png](output_65_1.png)
+![png](output_117_1.png)
 
 
 
 ```python
 # Plot normalized confusion matrix
-plot_confusion_matrix(cnf_matrix, classes=set(y), normalize=False,
+plot_confusion_matrix(cnf_matrix, classes=['Non-Pulsar', 'Pulsar'], normalize=False,
                       title='Normalized confusion matrix')
 ```
 
@@ -1446,71 +2178,10 @@ plot_confusion_matrix(cnf_matrix, classes=set(y), normalize=False,
 
 
 
-![png](output_66_1.png)
+![png](output_118_1.png)
 
 
-
-```python
-# compare a few different regularization performances on the dataset:
-C_param_range = [0.005, 0.1, 0.2, 0.3, 0.5, 0.6, 0.7, 0.8]
-names = [0.005, 0.1, 0.2, 0.3, 0.5, 0.6, 0.7, 0.8, 0.9]
-colors = sns.color_palette('Set2', n_colors=len(names))
-
-plt.figure(figsize=(10, 8))
-
-for n, c in enumerate(C_param_range):
-    # Fit a model
-    # Instantiate and fit a DecisionTreeClassifier
-    #tree_clf = DecisionTreeClassifier(criterion='entropy', max_depth=5)
-    #model_tree = tree_clf.fit(X_train, y_train)
-
-    # Predict
-    #y_pred = tree_clf.predict(X_test)
-    y_pred = clf.predict(X_test_transformed)
-    y_score = accuracy_score(y_test, y_pred)
-    
-    
-    fpr, tpr, thresholds = roc_curve(y_test, y_pred)
-    #roc_auc = auc(fpr, tpr)
-    print('----------------------------------------------')
-    print('AUC for {}: {}'.format(names[n], auc(fpr, tpr)))
-    lw = 2
-    plt.plot(fpr, tpr, color=colors[n],
-             lw=lw, label='ROC curve Normalization Weight: {}'.format(names[n]))
-    
-plt.plot([0, 1], [0, 1], color='navy', lw=lw, linestyle='--')
-plt.xlim([0.0, 1.0])
-plt.ylim([0.0, 1.05])
-plt.yticks([i/20.0 for i in range(21)])
-plt.xticks([i/20.0 for i in range(21)])
-plt.xlabel('False Positive Rate')
-plt.ylabel('True Positive Rate')
-plt.title('Receiver operating characteristic (ROC) Curve')
-plt.legend(loc='lower right')
-plt.show()
-```
-
-    ----------------------------------------------
-    AUC for 0.005: 0.9271785064211263
-    ----------------------------------------------
-    AUC for 0.1: 0.9271785064211263
-    ----------------------------------------------
-    AUC for 0.2: 0.9271785064211263
-    ----------------------------------------------
-    AUC for 0.3: 0.9271785064211263
-    ----------------------------------------------
-    AUC for 0.5: 0.9271785064211263
-    ----------------------------------------------
-    AUC for 0.6: 0.9271785064211263
-    ----------------------------------------------
-    AUC for 0.7: 0.9271785064211263
-    ----------------------------------------------
-    AUC for 0.8: 0.9271785064211263
-
-
-
-![png](output_67_1.png)
-
+## MSE and R2
 
 
 ```python
@@ -1523,189 +2194,144 @@ print('MSE score:', mse(y_test, y_pred))
 print('R-sq score:', r2_score(y_test,y_pred))
 ```
 
-    MSE score: 0.01675977653631285
-    R-sq score: 0.7832969933950742
+    MSE score: 0.05180294565769426
+    R-sq score: 0.38044238299459265
 
+
+## Feature Importance
 
 
 ```python
 # Feature importance
-clf.feature_importances_
+xgb_clf.feature_importances_
 ```
 
 
 
 
-    array([0.03053903, 0.04438728, 0.7243637 , 0.01979061, 0.0244896 ,
-           0.09525825, 0.0300423 , 0.03112921], dtype=float32)
+    array([0.04194515, 0.03668287, 0.68801844, 0.03353313, 0.02772439,
+           0.09195759, 0.03966612, 0.04047231], dtype=float32)
+
+
+
+
+```python
+importance = pd.Series(data=xgb_clf.feature_importances_, index=X_train.columns)
+importance.sort_values(ascending=False)
+```
+
+
+
+
+    KURTOSIS_IP       0.688018
+    STD_CURVE         0.091958
+    MEAN_IP           0.041945
+    SKEWNESS_CURVE    0.040472
+    KURTOSIS_CURVE    0.039666
+    STD_IP            0.036683
+    SKEWNESS_IP       0.033533
+    MEAN_CURVE        0.027724
+    dtype: float32
 
 
 
 
 ```python
 def plot_feature_importances(model):
+    
+    importance = pd.Series(data=model.feature_importances_, index=X_train.columns)
+    importance = importance.sort_values(ascending=True)
     n_features = X_train.shape[1]
     plt.figure(figsize=(8,8))
-    plt.barh(range(n_features), model.feature_importances_, align='center') 
-    plt.yticks(np.arange(n_features), X_train.columns.values) 
+    plt.barh(importance.index, importance.values, align='center') 
+    #plt.yticks(np.arange(n_features), X_train.columns.values) 
     plt.xlabel('Feature importance')
     plt.ylabel('Feature')
 
-plot_feature_importances(clf)
+plot_feature_importances(xgb_clf)
 ```
 
 
-![png](output_70_0.png)
+![png](output_124_0.png)
 
 
 
 ```python
-print("Testing Accuracy for XG Boost Classifier: {:.4}%".format(accuracy_score(y_test, pred) * 100))
+print("Testing Accuracy for XG Boost Classifier: {:.4}%".format(accuracy_score(y_test, y_pred) * 100))
 ```
 
-    Testing Accuracy for XG Boost Classifier: 98.32%
+    Testing Accuracy for XG Boost Classifier: 94.82%
 
 
 
 ```python
-def modelX(algorithm, X_train, y_train, X_test, y_test, of_type):
-    
-    print ("**********"*7)
-    print ("MODEL X")
-    print ("**********"*7)
-    algorithm.fit(X_train, y_train)
-    y_pred = algorithm.predict(X_test)
-    
-    print (algorithm)
-    print ("\n accuracy_score :", accuracy_score(y_test, y_pred))
-    
-    print ("\nclassification report :\n",(classification_report(y_test, y_pred)))
-        
-    plt.figure(figsize=(13,10))
-    plt.subplot(221)
-    sns.heatmap(confusion_matrix(y_test, y_pred),annot=True,fmt = "d",linecolor="k",linewidths=3)
-    plt.title("CONFUSION MATRIX",fontsize=20)
-    
-    pred_probs = algorithm.predict_proba(X_test)[:,1]
-    fpr,tpr,thresholds = roc_curve(y_test, pred_probs)
-    plt.subplot(222)
-    plt.plot(fpr,tpr,label = ("Area_under the curve :",auc(fpr,tpr)),color = "r")
-    plt.plot([1,0],[1,0],linestyle = "dashed",color ="k")
-    plt.legend(loc = "best")
-    plt.title("ROC - CURVE & AREA UNDER CURVE",fontsize=20)
-    
-    if of_type == "feat":
-        
-        dataframe = pd.DataFrame(algorithm.feature_importances_, X_train.columns).reset_index()
-        dataframe = dataframe.rename(columns={"index":"features",0:"coefficients"})
-        dataframe = dataframe.sort_values(by="coefficients",ascending = False)
-        plt.subplot(223)
-        ax = sns.barplot(x = "coefficients" ,y ="features",data=dataframe,palette="husl")
-        plt.title("FEATURE IMPORTANCES",fontsize =20)
-        for i,j in enumerate(dataframe["coefficients"]):
-            ax.text(.011,i,j,weight = "bold")
-    
-    elif of_type == "coef":
-        try:
-            dataframe = pd.DataFrame(algorithm.coef_.ravel(), X_train.columns).reset_index()
-            dataframe = dataframe.rename(columns={"index":"features",0:"coefficients"})
-            dataframe = dataframe.sort_values(by="coefficients",ascending = False)
-            plt.subplot(223)
-            ax = sns.barplot(x = "coefficients" ,y ="features",data=dataframe,palette="husl")
-            plt.title("FEATURE IMPORTANCES",fontsize =20)
-            for i,j in enumerate(dataframe["coefficients"]):
-                ax.text(.011,i,j,weight = "bold")
-        except:
-            print(f"{0} has no coef argument", str(algorithm))
-            
-
+print("Testing F1 Score for XG Boost Classifier: {:.4}%".format(f1_score(y_test, y_pred) * 100))
 ```
+
+    Testing F1 Score for XG Boost Classifier: 74.11%
+
+
+# INTERPRET RESULTS
 
 
 ```python
-modelX(clf, X_train_transformed, y_train, X_test_transformed, y_test, "coef")
-```
-
-    **********************************************************************
-    MODEL X
-    **********************************************************************
-    XGBClassifier(base_score=0.5, booster='gbtree', class_weight='balanced',
-                  colsample_bylevel=1, colsample_bynode=1, colsample_bytree=1,
-                  gamma=0, learning_rate=0.1, max_delta_step=0, max_depth=3,
-                  min_child_weight=1, missing=None, n_estimators=100, n_jobs=1,
-                  nthread=None, objective='binary:logistic', random_state=0,
-                  reg_alpha=0, reg_lambda=1, scale_pos_weight=1, seed=None,
-                  silent=None, subsample=1, verbosity=1)
-    
-     accuracy_score : 0.9832402234636871
-    
-    classification report :
-                   precision    recall  f1-score   support
-    
-               0       0.99      0.99      0.99      5408
-               1       0.94      0.86      0.90       499
-    
-        accuracy                           0.98      5907
-       macro avg       0.96      0.93      0.94      5907
-    weighted avg       0.98      0.98      0.98      5907
-    
-    0 has no coef argument XGBClassifier(base_score=0.5, booster='gbtree', class_weight='balanced',
-                  colsample_bylevel=1, colsample_bynode=1, colsample_bytree=1,
-                  gamma=0, learning_rate=0.1, max_delta_step=0, max_depth=3,
-                  min_child_weight=1, missing=None, n_estimators=100, n_jobs=1,
-                  nthread=None, objective='binary:logistic', random_state=0,
-                  reg_alpha=0, reg_lambda=1, scale_pos_weight=1, seed=None,
-                  silent=None, subsample=1, verbosity=1)
-
-
-
-![png](output_73_1.png)
-
-
-# `Interpret Results`
-
-
-```python
-
-preds = pd.Series(test_preds)
-preds.value_counts()
-```
-
-
-
-
-    0    5445
-    1     462
-    dtype: int64
-
-
-
-
-```python
-from xgboost import plot_importance, plot_tree
-
+# Cross-Validation
 from sklearn.model_selection import cross_val_score
-```
 
-
-```python
-xgb_cv_score = cross_val_score(clf, X_train_transformed, y_train, cv=3)
+xgb_cv_score = cross_val_score(xgb_clf, X_train_transformed, y_train, cv=3)
 mean_xgb_cv_score = np.mean(xgb_cv_score)
 
 print(f"Mean Cross Validation Score: {mean_xgb_cv_score :.2%}")
 ```
 
-    Mean Cross Validation Score: 97.75%
+    Mean Cross Validation Score: 98.02%
 
 
-# `CONCLUSION`
 
-With 98% accuracy, we were able to identify 431 pulsars, missing only 68 that we our model mistakenly identified as noise.
+```python
+# Feature Importance
+from xgboost import plot_importance
 
-# `FUTURE WORK`
+plot_importance(booster=xgb_clf)
+```
 
-1. Continue to improve accuracy of model by further tuning parameters.
 
-2. Test out model with additional and larger datasets.
 
-3. Identify new and interesting data about pulsars and black holes.
+
+    <matplotlib.axes._subplots.AxesSubplot at 0x12cac78d0>
+
+
+
+
+![png](output_129_1.png)
+
+
+# CONCLUSION
+
+We began our analysis with a pipeline to determine the most accurate models for predicting a pulsar. After performing Standard Scaling on the dataset, we checked split our dataset into train-test prediction models for Logistic Regression, Support Vector Machines, Decision Trees and XG Boost. All were fairly accurate, with Decision Trees and XG Boost topping the list for accuracy scores.
+
+We proceeded with a Decision Tree classifier with balanced class weights, which did fairly well, scoring 96% accuracy. However, because of the imbalanced classes, the F1 score is our most important validator for model accuracy, and the Decision Tree classifier scored 82%.
+
+Moving on to XGBoost, we scored 98% accuracy with an 89% F1 score. We were able to successfully identify 466 pulsars, missing only 78 that we our model mistakenly identified as noise.
+
+# RECOMMENDATIONS
+
+     * Focus on Kurtosis Integrated Profile
+ 
+     * Focus on Standard Deviation DM-NSR Curve
+ 
+     * Validate model predictions with analysis of other celestial objects 
+     producing cosmic rays to see if they show the same attributes.
+
+# FUTURE WORK
+
+1. Improving the model, trying other ways of scaling, balancing class weights.
+
+
+2. Looking at stars right before they die - predicting whether or not it will become a pulsar or not (could be slightly impossible considering stars live for billions  of years…)
+
+
+
+```python
+
+```
