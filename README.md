@@ -100,7 +100,8 @@ pd.set_option('display.max_columns', 0)
     fsds_1007219  v0.7.4 loaded.  Read the docs: https://fsds.readthedocs.io/en/latest/ 
 
 
-
+<html>
+   <body>
 <style  type="text/css" >
 </style><table id="T_8f607e64_5280_11ea_a243_f40f2405a054" ><caption>Loaded Packages and Handles</caption><thead>    <tr>        <th class="col_heading level0 col0" >Handle</th>        <th class="col_heading level0 col1" >Package</th>        <th class="col_heading level0 col2" >Description</th>    </tr></thead><tbody>
                 <tr>
@@ -139,24 +140,8 @@ pd.set_option('display.max_columns', 0)
                         <td id="T_8f607e64_5280_11ea_a243_f40f2405a054row6_col2" class="data row6 col2" >High-level data visualization library based on matplotlib</td>
             </tr>
     </tbody></table>
-
-
-
-        <script type="text/javascript">
-        window.PlotlyConfig = {MathJaxConfig: 'local'};
-        if (window.MathJax) {MathJax.Hub.Config({SVG: {font: "STIX-Web"}});}
-        if (typeof require !== 'undefined') {
-        require.undef("plotly");
-        requirejs.config({
-            paths: {
-                'plotly': ['https://cdn.plot.ly/plotly-latest.min']
-            }
-        });
-        require(['plotly'], function(Plotly) {
-            window._Plotly = Plotly;
-        });
-        }
-        </script>
+   </body>
+   </html>
         
 
 
@@ -194,20 +179,9 @@ df.head()
 
 
 
-
+<html>
+   <body>
 <div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
 </style>
 <table border="1" class="dataframe">
   <thead>
@@ -288,7 +262,8 @@ df.head()
   </tbody>
 </table>
 </div>
-
+</body>
+</html>
 
 
 # SCRUB
@@ -335,20 +310,9 @@ df.describe()
 
 
 
-
+<html>
+   <body>
 <div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
 </style>
 <table border="1" class="dataframe">
   <thead>
@@ -465,7 +429,8 @@ df.describe()
   </tbody>
 </table>
 </div>
-
+</body>
+</html>
 
 
 
