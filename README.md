@@ -1,31 +1,27 @@
 
-## PREDICTING A PULSAR STAR
+# Predicting Pulsars with Decision Trees and XG Boost
 
-MODULE 5 FINAL PROJECT
 
-* Student name: Ru Keïn
-* Student pace: full time
-* Scheduled project review date/time: Feb 11, 2020 @ 4 PM EST
-* Instructor name: James Irving, PhD
-* Blog post URL:
+![GitHub repo size](https://img.shields.io/github/repo-size/hakkeray/timeseries-forecasting-with-sarimax-and-gridsearch)
+![GitHub license](https://img.shields.io/github/license/hakkeray/timeseries-forecasting-with-sarimax-and-gridsearch?color=black)
 
-### OVERVIEW
+Predicting Pulsars with Decision Trees and XG Boost is a `supervised machine learning feature classification project` that uses `Decision Trees and XGBoost` to `predict and classify signals as either a pulsar or noise`. 
 
-*From Dr. Robert Lyon on Kaggle:*
+![](./_93_1.png)
 
 HTRU2 is a data set which describes **a sample of pulsar candidates collected during the High Time Resolution Universe Survey.**
 
-`Pulsars are a rare type of Neutron star that produce radio emission detectable here on Earth. They are of considerable scientific interest as probes of space-time, the inter-stellar medium, and states of matter.`
+Pulsars are a rare type of Neutron star that produce radio emission detectable here on Earth. They are of considerable scientific interest as probes of space-time, the inter-stellar medium, and states of matter.
 
-As pulsars rotate, their emission beam sweeps across the sky, and when this crosses our line of sight, produces a detectable pattern of broadband radio emission. `As pulsars rotate rapidly, this pattern repeats periodically. Thus pulsar search involves looking for periodic radio signals with large radio telescopes.`
+As pulsars rotate, their emission beams sweep across the sky which produces a detectable pattern of broadband radio emission when crossing our line of sight. As pulsars rotate rapidly, this pattern repeats periodically. Thus pulsar search involves looking for periodic radio signals with large radio telescopes.
 
-Each pulsar produces a slightly different emission pattern, which varies slightly with each rotation. `Thus a potential signal detection known as a 'candidate', is averaged over many rotations of the pulsar, as determined by the length of an observation. In the absence of additional info, each candidate could potentially describe a real pulsar.` **However in practice almost all detections are caused by radio frequency interference (RFI) and noise, making legitimate signals hard to find.** Here the legitimate pulsar examples are a minority positive class, and spurious examples the majority negative class.
+Each pulsar produces a slightly different emission pattern, which varies slightly with each rotation. Detection of a potential signal is known as a 'candidate', which is averaged over many rotations of the pulsar, as determined by the length of an observation. In the absence of additional info, each candidate could potentially describe a real pulsar. **However in practice almost all detections are caused by radio frequency interference (RFI) and noise, making legitimate signals hard to find.** Thus, legitimate pulsar examples are a minority positive class, and spurious examples the majority negative class.
+
+![](./output/output_20_2.png)
 
 The data set shared here contains **16,259 spurious examples caused by RFI/noise**, and **1,639 real pulsar examples**. Each row lists the variables first, and the class label is the final entry. The class labels used are 0 (negative) and 1 (positive).
 
-### Attributes
-
-Each candidate is described by 8 continuous variables, and a single class variable. The first four are simple statistics obtained from the integrated pulse profile (folded profile). This is an array of continuous variables that describe a longitude-resolved version of the signal that has been averaged in both time and frequency . The remaining four variables are similarly obtained from the DM-SNR curve . These are summarised below:
+Each candidate is described by 8 continuous variables, and a single class variable. The first four are simple statistics obtained from the integrated pulse profile (folded profile). This is an array of continuous variables that describe a longitude-resolved version of the signal that has been averaged in both time and frequency. The remaining four variables are similarly obtained from the DM-SNR curve.
 
     * Mean of the integrated profile.
     * Standard deviation of the integrated profile.
@@ -43,7 +39,34 @@ HTRU 2 Summary:
             * 1,639 positive examples
             * 16,259 negative examples
 
-### Outline
+## Prerequisites
+
+Before you begin, ensure you have met the following requirements:
+* You have installed the latest version of `Jupyter Notebook`
+* You have a `<Windows/Linux/Mac>` machine. 
+
+
+## Running the Time Series Forecasting with SARIMAX and Gridsearch Project
+
+To run this project locally, follow these steps:
+
+In the command line/terminal:
+
+```
+$ git clone https://github.com/hakkeray/timeseries-forecasting-with-sarimax-and-gridsearch
+$ cd timeseries-forecasting-with-sarimax-and-gridsearch
+$ jupyter notebook
+```
+
+## Contact
+
+If you want to contact me you can reach me at <rukeine@gmail.com>.
+
+## License
+
+This project uses the following license: [MIT License](./LICENSE.md).
+
+## Outline
 
     * IMPORT PACKAGES + LIBRARIES
     
@@ -563,15 +586,15 @@ hotmap(df, figsize=(10,8))
 ```
 
 
-![png](output_20_0.png)
+![png](./output/output_20_0.png)
 
 
 
-![png](output_20_1.png)
+![png](./output/output_20_1.png)
 
 
 
-![png](output_20_2.png)
+![png](./output/output_20_2.png)
 
 
 Target Class Values are highly differentiated for the following features:
@@ -638,7 +661,7 @@ plt.show()
 
 
 
-![png](output_22_1.png)
+![png](./output/output_22_1.png)
 
 
 The mean and standard deviation of the Skewness Curve if also a good candidate predictor for our target class.
@@ -673,7 +696,7 @@ print ("***************************************")
 
 
 
-![png](output_24_1.png)
+![png](./output/output_24_1.png)
 
 
 
@@ -684,7 +707,7 @@ plt.show()
 ```
 
 
-![png](output_25_0.png)
+![png](./output/output_25_0.png)
 
 
 
@@ -753,7 +776,7 @@ plt.subplots_adjust(wspace =.4)
 ```
 
 
-![png](output_27_0.png)
+![png](./output/output_27_0.png)
 
 
 
@@ -782,7 +805,7 @@ print ("****************************************************")
 
 
 
-![png](output_28_1.png)
+![png](./output/output_28_1.png)
 
 
 
@@ -818,7 +841,7 @@ plt.show()
 ```
 
 
-![png](output_29_0.png)
+![png](./output/output_29_0.png)
 
 
 
@@ -850,7 +873,7 @@ plt.show()
 ```
 
 
-![png](output_30_0.png)
+![png](./output/output_30_0.png)
 
 
 
@@ -860,7 +883,7 @@ plt.show()
 ```
 
 
-![png](output_31_0.png)
+![png](./output/output_31_0.png)
 
 
 
@@ -878,7 +901,7 @@ for i,j in itertools.zip_longest(columns,range(length)):
 ```
 
 
-![png](output_32_0.png)
+![png](./output/output_32_0.png)
 
 
 
@@ -897,7 +920,7 @@ for i,j in itertools.zip_longest(columns,range(length)):
 ```
 
 
-![png](output_33_0.png)
+![png](./output/output_33_0.png)
 
 
 
@@ -921,7 +944,7 @@ sns.scatterplot(x='MEAN_IP', y='KURTOSIS_IP',
 
 
 
-![png](output_34_1.png)
+![png](./output/output_34_1.png)
 
 
 
@@ -944,7 +967,7 @@ sns.scatterplot(x='SKEWNESS_CURVE', y='KURTOSIS_IP',
 
 
 
-![png](output_35_1.png)
+![png](./output/output_35_1.png)
 
 
 
@@ -967,7 +990,7 @@ sns.scatterplot(x='KURTOSIS_IP', y='KURTOSIS_CURVE',
 
 
 
-![png](output_36_1.png)
+![png](./output/output_36_1.png)
 
 
 
@@ -990,7 +1013,7 @@ sns.scatterplot(x='KURTOSIS_IP', y='STD_IP',
 
 
 
-![png](output_37_1.png)
+![png](./output/output_37_1.png)
 
 
 
@@ -1013,7 +1036,7 @@ sns.scatterplot(x='KURTOSIS_IP', y='KURTOSIS_CURVE',
 
 
 
-![png](output_38_1.png)
+![png](./output/output_38_1.png)
 
 
 # `MODEL`
@@ -1203,7 +1226,7 @@ Image(graph.create_png())
 
 
 
-![png](output_59_0.png)
+![png](./output/output_59_0.png)
 
 
 
@@ -1397,7 +1420,7 @@ plot_confusion_matrix(cnf_matrix, classes=['Non-Pulsar', 'Pulsar'], normalize=Tr
 
 
 
-![png](output_72_1.png)
+![png](./output/output_72_1.png)
 
 
 ## Parameter Tuning
@@ -1446,7 +1469,7 @@ plt.show()
 ```
 
 
-![png](output_75_0.png)
+![png](./output/output_75_0.png)
 
 
     Max tree depth optimal value does not improve beyond 3 for test data.
@@ -1495,7 +1518,7 @@ plt.show()
 ```
 
 
-![png](output_78_0.png)
+![png](./output/output_78_0.png)
 
 
     AUC does not improve beyond 0.2 for test data.
@@ -1543,7 +1566,7 @@ plt.show()
 ```
 
 
-![png](output_81_0.png)
+![png](./output/output_81_0.png)
 
 
     Highest AUC for both train and test data maximized at 0.10.
@@ -1590,7 +1613,7 @@ plt.show()
 ```
 
 
-![png](output_84_0.png)
+![png](./output/output_84_0.png)
 
 
     Increasing parameters has no clear effect on training data (flat AUC). 
@@ -1651,7 +1674,7 @@ Image(graph.create_png())
 
 
 
-![png](output_89_0.png)
+![png](./output/output_89_0.png)
 
 
 
@@ -1741,7 +1764,7 @@ modelX(dt_clf, X_train, y_train, X_test, y_test, "feat")
 
 
 
-![png](output_91_1.png)
+![png](./output/output_91_1.png)
 
 
 Kurtosis Integrated Profile ('KURTOSIS_IP') is by far the most important classifying feature when it comes to identifying Pulsars. Let's double check the other metrics with our scaled/transformed data:
@@ -1783,7 +1806,7 @@ modelX(dt_clf, X_train_transformed, y_train, X_test_transformed, y_test, "coef")
 
 
 
-![png](output_93_1.png)
+![png](./output/output_93_1.png)
 
 
 `F1 Score`
@@ -1905,7 +1928,7 @@ modelX(xgb_clf, X_train_transformed, y_train, X_test_transformed, y_test, "coef"
 
 
 
-![png](output_106_1.png)
+![png](./output/output_106_1.png)
 
 
 ## GridSearchCV
@@ -2028,7 +2051,7 @@ plt.show()
 
 
 
-![png](output_113_1.png)
+![png](./output/output_113_1.png)
 
 
 ### Confusion matrix
@@ -2129,7 +2152,7 @@ plot_confusion_matrix(cnf_matrix, classes=['Non-Pulsar', 'Pulsar'], normalize=Tr
 
 
 
-![png](output_117_1.png)
+![png](./output/output_117_1.png)
 
 
 
@@ -2143,7 +2166,7 @@ plot_confusion_matrix(cnf_matrix, classes=['Non-Pulsar', 'Pulsar'], normalize=Fa
 
 
 
-![png](output_118_1.png)
+![png](./output/output_118_1.png)
 
 
 ## MSE and R2
@@ -2217,7 +2240,7 @@ plot_feature_importances(xgb_clf)
 ```
 
 
-![png](output_124_0.png)
+![png](./output/output_124_0.png)
 
 
 
@@ -2268,7 +2291,7 @@ plot_importance(booster=xgb_clf)
 
 
 
-![png](output_129_1.png)
+![png](./output/output_129_1.png)
 
 
 # CONCLUSION
