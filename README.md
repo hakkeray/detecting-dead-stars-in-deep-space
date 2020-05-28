@@ -2,8 +2,8 @@
 # Predicting Pulsars with Decision Trees and XG Boost
 
 
-![GitHub repo size](https://img.shields.io/github/repo-size/hakkeray/timeseries-forecasting-with-sarimax-and-gridsearch)
-![GitHub license](https://img.shields.io/github/license/hakkeray/timeseries-forecasting-with-sarimax-and-gridsearch?color=black)
+![GitHub repo size](https://img.shields.io/github/repo-size/hakkeray/predicting-pulsars-with-decision-trees-and-xgboost)
+![GitHub license](https://img.shields.io/github/license/hakkeray/predicting-pulsars-with-decision-trees-and-xgboost?color=black)
 
 Predicting Pulsars with Decision Trees and XG Boost is a `supervised machine learning feature classification project` that uses `Decision Trees and XGBoost` to `predict and classify signals as either a pulsar or noise`. 
 
