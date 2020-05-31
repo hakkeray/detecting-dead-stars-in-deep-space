@@ -1,11 +1,10 @@
 
 # Predicting Pulsars with Decision Trees and XG Boost
 
-
 ![GitHub repo size](https://img.shields.io/github/repo-size/hakkeray/predicting-pulsars-with-decision-trees-and-xgboost)
 ![GitHub license](https://img.shields.io/github/license/hakkeray/predicting-pulsars-with-decision-trees-and-xgboost?color=black)
 
-Predicting Pulsars with Decision Trees and XG Boost is a `supervised machine learning feature classification project` that uses `Decision Trees and XGBoost` to `predict and classify signals as either a pulsar or noise`. 
+Predicting Pulsars with Decision Trees and XG Boost is a `supervised machine learning feature classification project` that uses `Decision Trees and XGBoost` to `predict and classify signals as either a pulsar or noise`.
 
 ![](./_93_1.png)
 
@@ -42,9 +41,9 @@ HTRU 2 Summary:
 ## Prerequisites
 
 Before you begin, ensure you have met the following requirements:
-* You have installed the latest version of `Jupyter Notebook`
-* You have a `<Windows/Linux/Mac>` machine. 
 
+* You have installed the latest version of `Jupyter Notebook`
+* You have a `<Windows/Linux/Mac>` machine.
 
 ## Running the Time Series Forecasting with SARIMAX and Gridsearch Project
 
@@ -52,11 +51,40 @@ To run this project locally, follow these steps:
 
 In the command line/terminal:
 
+```bash
+git clone https://github.com/hakkeray/predicting-pulsars-with-decision-trees-and-xgboost
+cd predicting-pulsars-with-decision-trees-and-xgboost
+jupyter notebook
 ```
-$ git clone https://github.com/hakkeray/timeseries-forecasting-with-sarimax-and-gridsearch
-$ cd timeseries-forecasting-with-sarimax-and-gridsearch
-$ jupyter notebook
-```
+
+# Summary
+
+## Pipeline
+
+To begin the analysis, I used a pipeline to determine the most accurate models for predicting a pulsar. After performing Standard Scaling on the dataset, I split the dataset into train-test prediction models for Logistic Regression, Support Vector Machines, Decision Trees and XG Boost. All were fairly accurate, with Decision Trees and XG Boost topping the list for accuracy scores.
+
+## Decision Trees
+
+Following this, I proceeded with a Decision Tree classifier with balanced class weights, which did fairly well, scoring 96% accuracy. However, because of the imbalanced classes, the F1 score is the most important validator for model accuracy, and the Decision Tree classifier scored 82%.
+
+## XGBoost
+
+Moving on to XGBoost, I scored 98% accuracy with an 89% F1 score. I was able to successfully identify 466 pulsars, missing only 78 that we our model mistakenly identified as noise.
+
+# RECOMMENDATIONS
+
+     * Focus on Kurtosis Integrated Profile
+ 
+     * Focus on Standard Deviation DM-NSR Curve
+ 
+     * Validate model predictions with analysis of other celestial objects 
+     producing cosmic rays to see if they show the same attributes.
+
+# FUTURE WORK
+
+1. Improving the model, trying other ways of scaling, balancing class weights.
+
+2. Looking at stars right before they die - predicting whether or not it will become a pulsar or not (could be slightly impossible considering stars live for billions  of years…)
 
 ## Contact
 
@@ -66,7 +94,17 @@ If you want to contact me you can reach me at <rukeine@gmail.com>.
 
 This project uses the following license: [MIT License](./LICENSE.md).
 
-## Outline
+```python
+#         _ __ _   _
+#  /\_/\ | '__| | | |
+#  [===] | |  | |_| |
+#   \./  |_|   \__,_|
+#
+```
+
+---
+
+## Process Outline
 
     * IMPORT PACKAGES + LIBRARIES
     
@@ -89,88 +127,7 @@ This project uses the following license: [MIT License](./LICENSE.md).
     * FUTURE WORK
 
 
-# IMPORT
-
-
-```python
-# Import code packages and libraries
-# FLATIRON BOOTCAMP Package Library
-#!pip install -U fsds_100719
-import fsds_100719 as fs
-from fsds_100719.imports import * # will pre-load pd,np,plt,mpl,sns
-%matplotlib inline
-
-from sklearn.model_selection import train_test_split
-import seaborn as sns
-sns.set_style('whitegrid')
-plt.style.use('seaborn-bright')
-
-
-font_dict={'family':'monospace',
-          'size':14}
-mpl.rc('font',**font_dict)
-
-#ignore pink warnings
-import warnings
-warnings.filterwarnings('ignore')
-# Allow for large # columns
-pd.set_option('display.max_columns', 0)
-# pd.set_option('display.max_rows','')
-
-
-```
-
-    fsds_1007219  v0.7.4 loaded.  Read the docs: https://fsds.readthedocs.io/en/latest/ 
-
-
-<html>
-   <body>
-<style  type="text/css" >
-</style><table id="T_8f607e64_5280_11ea_a243_f40f2405a054" ><caption>Loaded Packages and Handles</caption><thead>    <tr>        <th class="col_heading level0 col0" >Handle</th>        <th class="col_heading level0 col1" >Package</th>        <th class="col_heading level0 col2" >Description</th>    </tr></thead><tbody>
-                <tr>
-                                <td id="T_8f607e64_5280_11ea_a243_f40f2405a054row0_col0" class="data row0 col0" >dp</td>
-                        <td id="T_8f607e64_5280_11ea_a243_f40f2405a054row0_col1" class="data row0 col1" >IPython.display</td>
-                        <td id="T_8f607e64_5280_11ea_a243_f40f2405a054row0_col2" class="data row0 col2" >Display modules with helpful display and clearing commands.</td>
-            </tr>
-            <tr>
-                                <td id="T_8f607e64_5280_11ea_a243_f40f2405a054row1_col0" class="data row1 col0" >fs</td>
-                        <td id="T_8f607e64_5280_11ea_a243_f40f2405a054row1_col1" class="data row1 col1" >fsds_100719</td>
-                        <td id="T_8f607e64_5280_11ea_a243_f40f2405a054row1_col2" class="data row1 col2" >Custom data science bootcamp student package</td>
-            </tr>
-            <tr>
-                                <td id="T_8f607e64_5280_11ea_a243_f40f2405a054row2_col0" class="data row2 col0" >mpl</td>
-                        <td id="T_8f607e64_5280_11ea_a243_f40f2405a054row2_col1" class="data row2 col1" >matplotlib</td>
-                        <td id="T_8f607e64_5280_11ea_a243_f40f2405a054row2_col2" class="data row2 col2" >Matplotlib's base OOP module with formatting artists</td>
-            </tr>
-            <tr>
-                                <td id="T_8f607e64_5280_11ea_a243_f40f2405a054row3_col0" class="data row3 col0" >plt</td>
-                        <td id="T_8f607e64_5280_11ea_a243_f40f2405a054row3_col1" class="data row3 col1" >matplotlib.pyplot</td>
-                        <td id="T_8f607e64_5280_11ea_a243_f40f2405a054row3_col2" class="data row3 col2" >Matplotlib's matlab-like plotting module</td>
-            </tr>
-            <tr>
-                                <td id="T_8f607e64_5280_11ea_a243_f40f2405a054row4_col0" class="data row4 col0" >np</td>
-                        <td id="T_8f607e64_5280_11ea_a243_f40f2405a054row4_col1" class="data row4 col1" >numpy</td>
-                        <td id="T_8f607e64_5280_11ea_a243_f40f2405a054row4_col2" class="data row4 col2" >scientific computing with Python</td>
-            </tr>
-            <tr>
-                                <td id="T_8f607e64_5280_11ea_a243_f40f2405a054row5_col0" class="data row5 col0" >pd</td>
-                        <td id="T_8f607e64_5280_11ea_a243_f40f2405a054row5_col1" class="data row5 col1" >pandas</td>
-                        <td id="T_8f607e64_5280_11ea_a243_f40f2405a054row5_col2" class="data row5 col2" >High performance data structures and tools</td>
-            </tr>
-            <tr>
-                                <td id="T_8f607e64_5280_11ea_a243_f40f2405a054row6_col0" class="data row6 col0" >sns</td>
-                        <td id="T_8f607e64_5280_11ea_a243_f40f2405a054row6_col1" class="data row6 col1" >seaborn</td>
-                        <td id="T_8f607e64_5280_11ea_a243_f40f2405a054row6_col2" class="data row6 col2" >High-level data visualization library based on matplotlib</td>
-            </tr>
-    </tbody></table>
-   </body>
-   </html>
-        
-
-
-    ['[i] Pandas .iplot() method activated.']
-
-
+## Libraries
 
 ```python
 from sklearn.preprocessing import StandardScaler
@@ -188,22 +145,13 @@ from IPython.display import Image
 from pydotplus import graph_from_dot_data
 from xgboost import XGBClassifier
 from sklearn.metrics import confusion_matrix
-from sklearn.model_selection import GridSearchCV 
+from sklearn.model_selection import GridSearchCV
 ```
 
-# OBTAIN
-
-
-```python
-# Load data
-df = pd.read_csv('pulsar_stars.csv')
-df.head()
-```
-
-
+# Dataset
 
 <html>
-   <body>
+<body>
 <div>
 </style>
 <table border="1" class="dataframe">
@@ -288,53 +236,10 @@ df.head()
 </body>
 </html>
 
-
-# SCRUB
-
-
-```python
-df.columns
-```
-
-
-
-
-    Index([' Mean of the integrated profile',
-           ' Standard deviation of the integrated profile',
-           ' Excess kurtosis of the integrated profile',
-           ' Skewness of the integrated profile', ' Mean of the DM-SNR curve',
-           ' Standard deviation of the DM-SNR curve',
-           ' Excess kurtosis of the DM-SNR curve', ' Skewness of the DM-SNR curve',
-           'target_class'],
-          dtype='object')
-
-
-
-
-```python
-# RENAMING COLUMNS
-df = df.rename(columns={
-    ' Mean of the integrated profile':'MEAN_IP',
-    ' Standard deviation of the integrated profile':'STD_IP', 
-    ' Excess kurtosis of the integrated profile':'KURTOSIS_IP', 
-    ' Skewness of the integrated profile':'SKEWNESS_IP', 
-    ' Mean of the DM-SNR curve':'MEAN_CURVE', 
-    ' Standard deviation of the DM-SNR curve':'STD_CURVE', 
-    ' Excess kurtosis of the DM-SNR curve':'KURTOSIS_CURVE',
-    ' Skewness of the DM-SNR curve': 'SKEWNESS_CURVE',
-    'target_class':'TARGET'})
-```
-
-
-```python
-# PRE-PROCESSING
-df.describe()
-```
-
-
+# Descriptive Statistics
 
 <html>
-   <body>
+<body>
 <div>
 </style>
 <table border="1" class="dataframe">
@@ -455,8 +360,6 @@ df.describe()
 </body>
 </html>
 
-
-
 ```python
 df.info()
 ```
@@ -476,63 +379,13 @@ df.info()
     dtypes: float64(8), int64(1)
     memory usage: 1.2 MB
 
-
-
-```python
-# Check for null values
-df.isna().sum()
-```
-
-
-
-
-    MEAN_IP           0
-    STD_IP            0
-    KURTOSIS_IP       0
-    SKEWNESS_IP       0
-    MEAN_CURVE        0
-    STD_CURVE         0
-    KURTOSIS_CURVE    0
-    SKEWNESS_CURVE    0
-    TARGET            0
-    dtype: int64
-
-
-
 # EXPLORE
 
 Exploratory Data Analysis (EDA)
 
-
-```python
-df.shape
-```
-
-
-
-
-    (17898, 9)
-
-
-
-
-```python
-df['TARGET'].value_counts()
-```
-
-
-
-
-    0    16259
-    1     1639
-    Name: TARGET, dtype: int64
-
-
-
 ## Comparing Attributes
 
 ### `Hotmap( )`
-
 
 ```python
 def hotmap(df, figsize=(10,8)):
@@ -561,7 +414,7 @@ def hotmap(df, figsize=(10,8)):
     
     plt.figure(figsize=(13,8))
     
-    ### compare proportion of target classes 
+    ### compare proportion of target classes
     plt.subplot(121)
     ax = sns.countplot(y = df["TARGET"],
                        palette=["b","lime"],
@@ -585,464 +438,81 @@ def hotmap(df, figsize=(10,8)):
 hotmap(df, figsize=(10,8))
 ```
 
-
 ![png](./output/output_20_0.png)
-
-
 
 ![png](./output/output_20_1.png)
 
-
-
 ![png](./output/output_20_2.png)
 
-
 Target Class Values are highly differentiated for the following features:
-    
     * Kurtosis Integrated Profile
     * Skewness Integrated Profile
- 
+
 Other candidates include:
   
     * Mean Curve
     * Standard Deviation Cruve
     * Kurtosis Curve
     * Skewness Curve
-    
+
 Least likely to be important in distinguishing pulsars and RFI include:
-    
+
     * Mean Integrated Profile
     * Standard Deviation IP
-   
 
+## Comparing Pulsar vs NonPulsar : Mean and Standard Deviation
 
-```python
-# LINEPLOTS
-compare = df.groupby('TARGET')[['MEAN_IP', 'STD_IP', 'KURTOSIS_IP', 'SKEWNESS_IP',
-                                        'MEAN_CURVE', 'STD_CURVE', 'KURTOSIS_CURVE',
-                                        'SKEWNESS_CURVE']].mean().reset_index()
-
-
-compare = compare.drop('TARGET', axis=1)
-
-# compare mean of target class varibales
-compare_mean = compare.transpose().reset_index()
-compare_mean = compare_mean.rename(columns={'index':"features", 0:"not_pulsar", 1:"pulsar"})
-plt.figure(figsize=(13,14))
-plt.subplot(211)
-sns.pointplot(x="features",y="not_pulsar",data=compare_mean,color="b")
-sns.pointplot(x="features",y="pulsar",data=compare_mean,color="lime")
-plt.xticks(rotation=45)
-plt.xlabel("")
-plt.grid(True,alpha=.3)
-plt.title("COMPARING MEAN OF ATTRIBUTES FOR TARGET CLASSES")
-
-# compare standard deviation of target class variables
-compare1 = df.groupby('TARGET')[['MEAN_IP', 'STD_IP', 'KURTOSIS_IP', 'SKEWNESS_IP',
-                                        'MEAN_CURVE', 'STD_CURVE', 'KURTOSIS_CURVE',
-                                        'SKEWNESS_CURVE']].std().reset_index()
-compare1 = compare1.drop('TARGET',axis=1)
-
-
-compare_std = compare1.transpose().reset_index()
-compare_std = compare_std.rename(columns={'index':"features", 0:"not_pulsar", 1:"pulsar"})
-plt.subplot(212)
-sns.pointplot(x="features",y="not_pulsar",data=compare_std,color="b")
-sns.pointplot(x="features",y="pulsar",data=compare_std,color="lime")
-plt.xticks(rotation=45)
-plt.grid(True,alpha=.3)
-plt.title("COMPARING STANDARD DEVIATION OF ATTRIBUTES FOR TARGET CLASSES")
-plt.subplots_adjust(hspace =.4)
-print ("[GREEN == PULSAR , BLUE == NON-PULSAR]")
-plt.show()
-```
-
-    [GREEN == PULSAR , BLUE == NON-PULSAR]
-
-
+[GREEN == PULSAR , BLUE == NON-PULSAR]
 
 ![png](./output/output_22_1.png)
 
-
 The mean and standard deviation of the Skewness Curve if also a good candidate predictor for our target class.
 
-
-```python
-# DISTRIBUTION
-import itertools
-columns = ['MEAN_IP', 'STD_IP', 'KURTOSIS_IP', 'SKEWNESS_IP',
-           'MEAN_CURVE', 'STD_CURVE', 'KURTOSIS_CURVE','SKEWNESS_CURVE']
-length  = len(columns)
-colors  = ["r","lime","b","m","orangered","c","k","orange"] 
-
-plt.figure(figsize=(13,20))
-for i,j,k in itertools.zip_longest(columns,range(length),colors):
-    plt.subplot(length/2,length/4,j+1)
-    sns.distplot(df[i],color=k)
-    plt.title(i)
-    plt.subplots_adjust(hspace = .3)
-    plt.axvline(df[i].mean(),color = "k",linestyle="dashed",label="MEAN")
-    plt.axvline(df[i].std(),color = "b",linestyle="dotted",label="STANDARD DEVIATION")
-    plt.legend(loc="upper right")
-    
-print ("***************************************")
-print ("DISTIBUTION OF VARIABLES IN DATA SET")
-print ("***************************************")
-```
-
-    ***************************************
-    DISTIBUTION OF VARIABLES IN DATA SET
-    ***************************************
-
-
+# Distribution of Target Class Variables
 
 ![png](./output/output_24_1.png)
 
-
-
-```python
-sns.pairplot(df,hue="TARGET")
-plt.title("pair plot for variables")
-plt.show()
-```
-
+# Pairplot
 
 ![png](./output/output_25_0.png)
 
-
-
-```python
-df.columns
-```
-
-
-
-
-    Index(['MEAN_IP', 'STD_IP', 'KURTOSIS_IP', 'SKEWNESS_IP', 'MEAN_CURVE',
-           'STD_CURVE', 'KURTOSIS_CURVE', 'SKEWNESS_CURVE', 'TARGET'],
-          dtype='object')
-
-
-
-
-```python
-# SCATTERPLOTS
-plt.figure(figsize=(14,7))
-
-##### FIRST PLOT
-plt.subplot(121)
-plt.scatter(x='KURTOSIS_IP',y='SKEWNESS_IP', data=df[df['TARGET'] == 1],alpha=.7,
-            label="PULSARS", s=30, color='cyan',linewidths=.4,edgecolors="black")
-plt.scatter(x='KURTOSIS_IP',y='SKEWNESS_IP', data=df[df['TARGET'] == 0],alpha=.6,
-            label="NOT PULSARS",s=30,color ="b",linewidths=.4,edgecolors="black")
-## VLINES
-plt.axvline(df[df['TARGET'] == 1]['KURTOSIS_IP'].mean(),
-            color = "k",linestyle="dashed",label='PULSAR Mean')
-plt.axvline(df[df['TARGET'] == 0]['KURTOSIS_IP'].mean(),
-            color = "magenta",linestyle="dashed",label ='NON-PULSAR Mean')
-## HLINES
-plt.axhline(df[df['TARGET'] == 1]['SKEWNESS_IP'].mean(),
-            color = "k",linestyle="dashed")
-plt.axhline(df[df['TARGET'] == 0]['SKEWNESS_IP'].mean(),
-            color = "magenta",linestyle="dashed")
-## LABELS
-plt.legend(loc='best')
-plt.xlabel("Kurtosis Integrated Profile")
-plt.ylabel("Skewness Integrated Profile")
-# plt.title("Scatter plot for skewness and kurtosis for target classes")
-
-##### SECOND PLOT
-plt.subplot(122)
-plt.scatter(x='SKEWNESS_CURVE',y='KURTOSIS_CURVE',data=df[df['TARGET'] == 0],alpha=.7,
-            label='NOT PULSARS',s=30,color ="blue",linewidths=.4,edgecolors="black")
-plt.scatter(x='SKEWNESS_CURVE',y='KURTOSIS_CURVE',data=df[df['TARGET'] == 1],alpha=.7,
-            label="PULSARS",s=30,color = "cyan",linewidths=.4,edgecolors="black")
-## VLINES
-plt.axvline(df[df['TARGET'] == 1]['KURTOSIS_CURVE'].mean(),
-            color = "k",linestyle="dashed",label ="PULSAR Mean")
-plt.axvline(df[df['TARGET'] == 0]['KURTOSIS_CURVE'].mean(),
-            color = "magenta",linestyle="dashed",label ="NON-PULSAR Mean")
-## HLINES
-plt.axhline(df[df['TARGET'] == 1]['SKEWNESS_CURVE'].mean(),
-            color = "k",linestyle="dashed")
-plt.axhline(df[df['TARGET'] == 0]['SKEWNESS_CURVE'].mean(),
-            color = "magenta",linestyle="dashed")
-## LABELS
-plt.legend(loc ="best")
-plt.xlabel("Skewness DM-SNR Curve")
-plt.ylabel("Kurtosis DM-SNR Curve")
-plt.title("Scatter plot for skewness and kurtosis of dmsnr_curve for target classes")
-plt.subplots_adjust(wspace =.4)
-```
-
+# Scatterplot
 
 ![png](./output/output_27_0.png)
 
-
-
-```python
-# BOXPLOTS
-columns = [x for x in df.columns if x not in ['TARGET']]
-length  = len(columns)
-plt.figure(figsize=(13,20))
-for i,j in itertools.zip_longest(columns,range(length)):
-    plt.subplot(4,2,j+1)
-    sns.lvplot(x=df['TARGET'],y=df[i],palette=["blue","cyan"])
-    plt.title(i)
-    plt.subplots_adjust(hspace=.3)
-    plt.axhline(df[i].mean(),linestyle = "dashed",color ="k",
-                label ="Mean value for data")
-    plt.legend(loc="best")
-    
-print ("****************************************************")
-print ("BOXPLOT FOR VARIABLES IN DATA SET WITH TARGET CLASS")
-print ("****************************************************")
-```
-
-    ****************************************************
-    BOXPLOT FOR VARIABLES IN DATA SET WITH TARGET CLASS
-    ****************************************************
-
-
+# Boxplot
 
 ![png](./output/output_28_1.png)
 
-
-
-```python
-# STACKPLOTS
-st = df[df['TARGET'] == 1].reset_index()
-nst= df[df['TARGET'] == 0].reset_index()
-new = pd.concat([nst,st]).reset_index()
-
-plt.figure(figsize=(13,10))
-plt.stackplot(new.index,new['MEAN_IP'],
-              alpha =.5,color="b",labels=['MEAN_IP'])
-plt.stackplot(new.index,new['STD_IP'],
-              alpha=.7,color="c",labels=['STD_IP'])
-plt.stackplot(new.index,new['SKEWNESS_IP'],
-              alpha=.5,color ="orangered",labels=['SKEWNESS_IP'])
-plt.stackplot(new.index,new['KURTOSIS_IP'],
-              alpha=.8,color = "magenta",labels=['KURTOSIS_IP'])
-
-plt.axvline(x=16259,color = "black",linestyle="dashed",
-            label = "PULSARS vs NON-PULSARS")
-plt.axhline(new['MEAN_IP'].mean(),color = "b",
-            linestyle="dashed",label = "Average Mean Profile")
-plt.axhline(new['STD_IP'].mean(),color = "c",
-            linestyle="dashed",label = "Average Std Profile")
-plt.axhline(new['SKEWNESS_IP'].mean(),color = "orangered",
-            linestyle="dashed",label = "Average Skewness Profile")
-plt.axhline(new['KURTOSIS_IP'].mean(),color = "magenta",
-            linestyle="dashed",label = "Average Kurtosis Profile")
-plt.legend(loc="best")
-plt.title("Area plot for attributes for pulsar stars vs non pulsar stars")
-plt.show()
-```
-
+# Stackplot
 
 ![png](./output/output_29_0.png)
 
-
-
-```python
-from mpl_toolkits.mplot3d import Axes3D
-fig = plt.figure(figsize=(13,13))
-ax  = fig.add_subplot(111,projection = "3d")
-
-ax.scatter(df[df["TARGET"] == 1][["MEAN_IP"]],
-           df[df["TARGET"] == 1][["STD_IP"]],
-           df[df["TARGET"] == 1][["SKEWNESS_CURVE"]],
-           alpha=.5, s=80, linewidth=2, edgecolor="w",
-           color="lime", label="Pulsar")
-
-ax.scatter(df[df["TARGET"] == 0][["MEAN_IP"]],
-           df[df["TARGET"] == 0][["STD_IP"]],
-           df[df["TARGET"] == 0][["SKEWNESS_CURVE"]],
-           alpha=.5, s=80, linewidth=2, edgecolor="w",
-           color="b", label="Non-Pulsar")
-
-ax.set_xlabel("MEAN_IP", fontsize=15)
-ax.set_ylabel("STD_IP", fontsize=15)
-ax.set_zlabel("SKEWNESS_CURVE",fontsize=15)
-plt.legend(loc="best")
-fig.set_facecolor("w")
-plt.title("MEAN_PROFILE VS STD_PROFILE VS SKEWNESS_DMSNR_CURVE",
-          fontsize=10)
-plt.show()
-```
-
+# 3D Plot
 
 ![png](./output/output_30_0.png)
 
-
-
-```python
-sns.jointplot(df['MEAN_IP'],df['STD_IP'],kind="kde",scale=10)
-plt.show()
-```
-
+# Jointplot
 
 ![png](./output/output_31_0.png)
 
-
-
-```python
-columns = [x for x in df.columns if x not in ['TARGET']]
-length  = len(columns)
-
-plt.figure(figsize=(13,25))
-
-for i,j in itertools.zip_longest(columns,range(length)):
-    plt.subplot(length/2,length/4,j+1)
-    sns.violinplot(x=df['TARGET'],y=df[i],
-                   palette=["blue","cyan"],alpha=.5)
-    plt.title(i)
-```
-
-
 ![png](./output/output_32_0.png)
 
-
-
-```python
-# BARPLOTS
-columns = [x for x in df.columns if x not in ['TARGET']]
-length  = len(columns)
-
-plt.figure(figsize=(13,25))
-
-for i,j in itertools.zip_longest(columns,range(length)):
-    plt.subplot(length/2,length/4,j+1)
-    sns.barplot(x=df['TARGET'],y=df[i],
-                   palette=["blue","lime"],alpha=.7)
-    plt.title(i)
-```
-
+# Barplots
 
 ![png](./output/output_33_0.png)
 
-
-
-```python
-f, ax = plt.subplots(figsize=(6.5, 6.5))
-sns.despine(f, left=True, bottom=True)
-
-sns.scatterplot(x='MEAN_IP', y='KURTOSIS_IP',
-                hue='TARGET', size='SKEWNESS_IP',
-                palette=['b','c'],
-                sizes=(1, 8), linewidth=0,
-                data=df, ax=ax)
-
-```
-
-
-
-
-    <matplotlib.axes._subplots.AxesSubplot at 0x123271080>
-
-
-
-
 ![png](./output/output_34_1.png)
-
-
-
-```python
-f, ax = plt.subplots(figsize=(6.5, 6.5))
-sns.despine(f, left=True, bottom=True)
-
-sns.scatterplot(x='SKEWNESS_CURVE', y='KURTOSIS_IP',
-                hue='TARGET', size='MEAN_CURVE',
-                palette=['b','c'],
-                sizes=(1, 8), linewidth=0,
-                data=df, ax=ax)
-```
-
-
-
-
-    <matplotlib.axes._subplots.AxesSubplot at 0x124630dd8>
-
-
-
-
-![png](./output/output_35_1.png)
-
-
-
-```python
-f, ax = plt.subplots(figsize=(6.5, 6.5))
-sns.despine(f, left=True, bottom=True)
-
-sns.scatterplot(x='KURTOSIS_IP', y='KURTOSIS_CURVE',
-                hue='TARGET', size='MEAN_CURVE',
-                palette=['b','c'],
-                sizes=(1, 8), linewidth=0,
-                data=df, ax=ax)
-```
-
-
-
-
-    <matplotlib.axes._subplots.AxesSubplot at 0x127522588>
-
-
-
 
 ![png](./output/output_36_1.png)
 
-
-
-```python
-f, ax = plt.subplots(figsize=(6.5, 6.5))
-sns.despine(f, left=True, bottom=True)
-
-sns.scatterplot(x='KURTOSIS_IP', y='STD_IP',
-                hue='TARGET', size='KURTOSIS_IP',
-                palette=['b','c'],
-                sizes=(1, 8), linewidth=0,
-                data=df, ax=ax)
-```
-
-
-
-
-    <matplotlib.axes._subplots.AxesSubplot at 0x1275220f0>
-
-
-
-
 ![png](./output/output_37_1.png)
-
-
-
-```python
-f, ax = plt.subplots(figsize=(6.5, 6.5))
-sns.despine(f, left=True, bottom=True)
-
-sns.scatterplot(x='KURTOSIS_IP', y='KURTOSIS_CURVE',
-                hue='TARGET', size='KURTOSIS_IP',
-                palette=['b','c'],
-                sizes=(1, 8), linewidth=0,
-                data=df, ax=ax)
-```
-
-
-
-
-    <matplotlib.axes._subplots.AxesSubplot at 0x1265d90f0>
-
-
-
 
 ![png](./output/output_38_1.png)
 
-
-# `MODEL`
+## MODEL
 
 ## Split Data
-
 
 ```python
 # create our feature set X and labels y:
@@ -1063,10 +533,8 @@ display(y.shape, X.shape)
 
     (17898, 8)
 
-
-
 ```python
-# We'll do a 75/25 split on the dataset for training/test. 
+# We'll do a 75/25 split on the dataset for training/test.
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.33)
 ```
 
@@ -1074,7 +542,6 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.33)
 
 1. Scale data using StandardScaler()
 2. Construct Pipelines
-
 
 ```python
 # logistic regression
@@ -1282,24 +749,9 @@ pd.crosstab(y_test, y_pred, rownames=['True'], colnames=['Predicted'], margins=T
     Confusion Matrix
     ----------------
 
-
-
-
-
+<html>
+<body>
 <div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -1337,9 +789,8 @@ pd.crosstab(y_test, y_pred, rownames=['True'], colnames=['Predicted'], margins=T
   </tbody>
 </table>
 </div>
-
-
-
+</body>
+</html>
 
 ```python
 # Print confusion matrix
@@ -1471,7 +922,6 @@ plt.show()
 
 ![png](./output/output_75_0.png)
 
-
     Max tree depth optimal value does not improve beyond 3 for test data.
 
 ### Min Sample Split
@@ -1517,13 +967,12 @@ plt.legend()
 plt.show()
 ```
 
-
 ![png](./output/output_78_0.png)
-
 
     AUC does not improve beyond 0.2 for test data.
 
 ### Minimum Sample Leafs
+
 Now we'll check for the best min_samples_leafs parameter value for our decision tree.
 
     * Create an array for min_samples_leafs values ranging from 0.1 - 0.5 
@@ -1532,7 +981,6 @@ Now we'll check for the best min_samples_leafs parameter value for our decision 
     * Calculate the training and test AUC for each run
     * Plot a graph to show under/over fitting and optimal value
     * Interpret the results
-
 
 ```python
 # Calculate the optimal value for minimum sample leafs
@@ -1555,7 +1003,7 @@ for min_samples_leaf in min_samples_leafs:
     test_results.append(roc_auc)
 
 # PLOT
-plt.figure(figsize=(11,7))    
+plt.figure(figsize=(11,7))
 plt.plot(min_samples_leafs, train_results, 'b', label='Train AUC')
 plt.plot(min_samples_leafs, test_results, 'r', label='Test AUC')
 plt.ylabel('AUC score')
@@ -1565,9 +1013,7 @@ plt.legend()
 plt.show()
 ```
 
-
 ![png](./output/output_81_0.png)
-
 
     Highest AUC for both train and test data maximized at 0.10.
 
@@ -1580,7 +1026,6 @@ Now we'll check for the best max_features parameter value for our decision tree.
     * Calculate the training and test AUC for each run
     * Plot a graph to show under/over fitting and optimal value
     * Interpret the results
-
 
 ```python
 # Find the best value for optimal maximum feature size
@@ -1612,9 +1057,7 @@ plt.legend()
 plt.show()
 ```
 
-
 ![png](./output/output_84_0.png)
-
 
     Increasing parameters has no clear effect on training data (flat AUC). 
     Optimal value for test data is 5.
@@ -1626,7 +1069,6 @@ We'll now use the best values from each training phase above and feed it back to
     * Train the classifier with optimal values identified
     * Compare the AUC with vanilla DT AUC
     * Interpret the results of comparison
-
 
 ```python
 # Re-train DT classifier with optimal values identified above
@@ -1647,15 +1089,9 @@ roc_auc = auc(false_positive_rate, true_positive_rate)
 roc_auc
 ```
 
-
-
-
     0.9257396472014128
 
-
-
 ### DOT Graph
-
 
 ```python
 # Create DOT data
@@ -1671,12 +1107,7 @@ graph = graph_from_dot_data(dot_data)
 Image(graph.create_png())
 ```
 
-
-
-
 ![png](./output/output_89_0.png)
-
-
 
 
 ```python
@@ -1729,10 +1160,7 @@ def modelX(algorithm, X_train, y_train, X_test, y_test, of_type):
                 ax.text(.011,i,j,weight = "bold")
         except:
             print(f"{0} has no coef argument", str(algorithm))
-            
-
 ```
-
 
 ```python
 # UNSCALED DATA
@@ -1762,13 +1190,9 @@ modelX(dt_clf, X_train, y_train, X_test, y_test, "feat")
     weighted avg       0.97      0.97      0.97      5907
     
 
-
-
 ![png](./output/output_91_1.png)
 
-
 Kurtosis Integrated Profile ('KURTOSIS_IP') is by far the most important classifying feature when it comes to identifying Pulsars. Let's double check the other metrics with our scaled/transformed data:
-
 
 ```python
 # SCALED DATA
@@ -1805,7 +1229,6 @@ modelX(dt_clf, X_train_transformed, y_train, X_test_transformed, y_test, "coef")
                            random_state=None, splitter='best')
 
 
-
 ![png](./output/output_93_1.png)
 
 
@@ -1821,9 +1244,6 @@ f1 = f1_score(y_test, y_pred)
 f1
 ```
 
-
-
-
     0.8245462402765774
 
 
@@ -1835,7 +1255,6 @@ Because the data involves imbalanced classes, F1 score is most important metric 
 Moving ahead with XG Boost
 
 ## Create Instance and Fit
-
 
 ```python
 # Fit XG Boost model  
@@ -1861,7 +1280,6 @@ xgb_clf.fit(X_train_transformed, y_train)
 
 ## Make Predictions
 
-
 ```python
 # Predict on training and test sets
 training_preds = xgb_clf.predict(X_train_transformed)
@@ -1871,7 +1289,6 @@ test_preds = xgb_clf.predict(X_test_transformed)
 ## Evaluate
 
 ### Accuracy
-
 
 ```python
 # Accuracy of training and test sets
@@ -1886,9 +1303,7 @@ print('Validation accuracy: {:.4}%'.format(test_accuracy * 100))
     Training Accuracy: 98.38%
     Validation accuracy: 98.02%
 
-
 ### ROC_AUC and Confusion Matrix
-
 
 ```python
 # SCALED DATA
@@ -1927,9 +1342,7 @@ modelX(xgb_clf, X_train_transformed, y_train, X_test_transformed, y_test, "coef"
                   silent=None, subsample=1, verbosity=1)
 
 
-
 ![png](./output/output_106_1.png)
-
 
 ## GridSearchCV
 
@@ -2053,9 +1466,7 @@ plt.show()
 
 ![png](./output/output_113_1.png)
 
-
 ### Confusion matrix
-
 
 ```python
 # Create and print a confusion matrix 
@@ -2067,25 +1478,9 @@ pd.crosstab(y_test, test_preds, rownames=['True'], colnames=['Predicted'], margi
     
     Confusion Matrix
     ----------------
-
-
-
-
-
+<html>
+<body>
 <div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -2123,11 +1518,12 @@ pd.crosstab(y_test, test_preds, rownames=['True'], colnames=['Predicted'], margi
   </tbody>
 </table>
 </div>
-
-
+</body>
+</html>
 
 
 ```python
+
 # Import confusion_matrix
 from sklearn.metrics import confusion_matrix
 
@@ -2140,8 +1536,6 @@ print('Confusion Matrix:\n', cnf_matrix)
      [[5324   39]
      [  78  466]]
 
-
-
 ```python
 # Plot normalized confusion matrix
 plot_confusion_matrix(cnf_matrix, classes=['Non-Pulsar', 'Pulsar'], normalize=True,
@@ -2150,11 +1544,7 @@ plot_confusion_matrix(cnf_matrix, classes=['Non-Pulsar', 'Pulsar'], normalize=Tr
 
     Normalized confusion matrix
 
-
-
 ![png](./output/output_117_1.png)
-
-
 
 ```python
 # Plot normalized confusion matrix
@@ -2164,52 +1554,39 @@ plot_confusion_matrix(cnf_matrix, classes=['Non-Pulsar', 'Pulsar'], normalize=Fa
 
     Confusion matrix, without normalization
 
-
-
 ![png](./output/output_118_1.png)
-
 
 ## MSE and R2
 
-
 ```python
+
 from sklearn.metrics import mean_squared_error as mse
 from sklearn.metrics import r2_score
 
-# Make predictions and evaluate 
-
+# Make predictions and evaluate
 print('MSE score:', mse(y_test, y_pred))
 print('R-sq score:', r2_score(y_test,y_pred))
+
 ```
 
     MSE score: 0.05180294565769426
     R-sq score: 0.38044238299459265
 
-
 ## Feature Importance
-
 
 ```python
 # Feature importance
 xgb_clf.feature_importances_
 ```
 
-
-
-
     array([0.04194515, 0.03668287, 0.68801844, 0.03353313, 0.02772439,
            0.09195759, 0.03966612, 0.04047231], dtype=float32)
-
-
 
 
 ```python
 importance = pd.Series(data=xgb_clf.feature_importances_, index=X_train.columns)
 importance.sort_values(ascending=False)
 ```
-
-
-
 
     KURTOSIS_IP       0.688018
     STD_CURVE         0.091958
@@ -2220,8 +1597,6 @@ importance.sort_values(ascending=False)
     SKEWNESS_IP       0.033533
     MEAN_CURVE        0.027724
     dtype: float32
-
-
 
 
 ```python
@@ -2239,10 +1614,7 @@ def plot_feature_importances(model):
 plot_feature_importances(xgb_clf)
 ```
 
-
 ![png](./output/output_124_0.png)
-
-
 
 ```python
 print("Testing Accuracy for XG Boost Classifier: {:.4}%".format(accuracy_score(y_test, y_pred) * 100))
@@ -2250,17 +1622,12 @@ print("Testing Accuracy for XG Boost Classifier: {:.4}%".format(accuracy_score(y
 
     Testing Accuracy for XG Boost Classifier: 94.82%
 
-
-
 ```python
 print("Testing F1 Score for XG Boost Classifier: {:.4}%".format(f1_score(y_test, y_pred) * 100))
 ```
-
     Testing F1 Score for XG Boost Classifier: 74.11%
 
-
 # INTERPRET RESULTS
-
 
 ```python
 # Cross-Validation
@@ -2274,8 +1641,6 @@ print(f"Mean Cross Validation Score: {mean_xgb_cv_score :.2%}")
 
     Mean Cross Validation Score: 98.02%
 
-
-
 ```python
 # Feature Importance
 from xgboost import plot_importance
@@ -2283,43 +1648,4 @@ from xgboost import plot_importance
 plot_importance(booster=xgb_clf)
 ```
 
-
-
-
-    <matplotlib.axes._subplots.AxesSubplot at 0x12cac78d0>
-
-
-
-
 ![png](./output/output_129_1.png)
-
-
-# CONCLUSION
-
-We began our analysis with a pipeline to determine the most accurate models for predicting a pulsar. After performing Standard Scaling on the dataset, we checked split our dataset into train-test prediction models for Logistic Regression, Support Vector Machines, Decision Trees and XG Boost. All were fairly accurate, with Decision Trees and XG Boost topping the list for accuracy scores.
-
-We proceeded with a Decision Tree classifier with balanced class weights, which did fairly well, scoring 96% accuracy. However, because of the imbalanced classes, the F1 score is our most important validator for model accuracy, and the Decision Tree classifier scored 82%.
-
-Moving on to XGBoost, we scored 98% accuracy with an 89% F1 score. We were able to successfully identify 466 pulsars, missing only 78 that we our model mistakenly identified as noise.
-
-# RECOMMENDATIONS
-
-     * Focus on Kurtosis Integrated Profile
- 
-     * Focus on Standard Deviation DM-NSR Curve
- 
-     * Validate model predictions with analysis of other celestial objects 
-     producing cosmic rays to see if they show the same attributes.
-
-# FUTURE WORK
-
-1. Improving the model, trying other ways of scaling, balancing class weights.
-
-
-2. Looking at stars right before they die - predicting whether or not it will become a pulsar or not (could be slightly impossible considering stars live for billions  of years…)
-
-
-
-```python
-
-```
